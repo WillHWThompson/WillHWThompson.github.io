@@ -146,8 +146,8 @@ disqus_shortname: al-folio # put your disqus shortname
 external_sources:
   #- name: medium.com
   #  rss_url: https://medium.com/@will.w.thompson/feed
-  #- name: substack.com 
-  #  rss_url: https://willthompson.substack.com/feed 
+  - name: substack.com 
+    rss_url: https://willthompson.substack.com/feed
 # -----------------------------------------------------------------------------
 # Collections
 # -----------------------------------------------------------------------------
