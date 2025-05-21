@@ -145,9 +145,9 @@ disqus_shortname: al-folio # put your disqus shortname
 # you can display them in your blog by adding a link to the RSS feed.
 external_sources:
   #- name: medium.com
-  #rss_url: https://medium.com/@will.w.thompson/feed
-  - name: substack.com 
-    rss_url: https://willthompson.substack.com/feed 
+  #  rss_url: https://medium.com/@will.w.thompson/feed
+  #- name: substack.com 
+  #  rss_url: https://willthompson.substack.com/feed 
 # -----------------------------------------------------------------------------
 # Collections
 # -----------------------------------------------------------------------------
