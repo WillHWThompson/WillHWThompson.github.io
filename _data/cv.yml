@@ -1,117 +1,123 @@
+# ====== UPDATED CV (large-stroke summary) ======
+
 - title: General Information
   type: map
   contents:
     - name: Full Name
-      value: Will Thompson
-    - name: Date of Birth
-      value: 3/14/1998
-    - name: Languages
-      value: English
+      value: William H. W. Thompson
+    - name: Email
+      value: wthomps3@uvm.edu
+    - name: Website
+      value: https://www.willhwthompson.com
+    - name: GitHub
+      value: https://github.com/WillHWThompson
 
 - title: Education
   type: time_table
   contents:
-    - title: PhD
+    - title: Ph.D. in Complex Systems & Data Science
       institution: University of Vermont
-      year: 2022-Present 
-
-    - title: Bachelor of the Arts, Liberal Arts 
-      institution: St. John's College, Santa Fe
-      year: 2016-2020
+      year: 2022 – Present
+    - title: B.A. in Liberal Arts
+      institution: St. John’s College, Santa Fe
+      year: 2016 – 2020
 
 - title: Experience
   type: time_table
   contents:
-
     - title: Graduate Research Assistant
-      institution: University of Vermont  
-      year: 2022-Present
+      institution: University of Vermont
       location: Burlington, VT
-      description:
-        - Researched models of robustness and optimal facility placement
-        - Studied dynamics on networks and developed inference methods 
-        - Coursework in complex systems, statistical physics, chaos theory, advanced modeling
-
-    - title: Post-Baccalaureate Researcher 
+      year: 2022 – Present
+    - title: Post-Baccalaureate Researcher
       institution: Los Alamos National Laboratory
-      year: 2021-Present
       location: Los Alamos, NM
-      description:
-        - Constructed new 200+ unit photon detection system
-        - Developed and maintained detector control and data analysis code
-        - Implemented data acquisition upgrades
-        - Introduced automation for smooth operations
-
-    - title: Data Scientist Intern
+      year: 2021 – Present
+    - title: Data Scientist
       institution: MITRE Corporation
-      year: 2020  
       location: Santa Fe, NM
-      description:
-        - Developed solutions using complex systems science 
-        - Co-created open-source tool for agent-based modeling
-        - Modeled satellite network robustness
-        - Analyzed legal datasets
-
+      year: Aug 2020 – Dec 2020
     - title: Head Senior Lab Assistant
-      institution: St. John's College
-      year: 2019-2021 
+      institution: St. John’s College
       location: Santa Fe, NM
-      description:
-        - Managed student physics and biology lab teams  
-        - Developed new lab curriculum and materials      
+      year: May 2019 – May 2021
+    - title: Undergraduate Research Fellow
+      institution: Carnegie Mellon University
+      location: Pittsburgh, PA
+      year: Jun 2018 – Aug 2018
+    - title: Undergraduate Researcher
+      institution: Santa Fe Institute
+      location: Santa Fe, NM
+      year: Jun 2017 – Jun 2018
 
-- title: Grants and Awards
-  type: time_table
-  contents:
-
-    - title: Grants
-      items:
-        - Science Undergraduate Laboratory Internship Grant
-      
-    - title: Awards
-      items:  
-        - Second Place, UVM Computing Student Research Day
-        - Third Place, UVM Computing Science Research Day
-        - MITRE Best Paper Award
-        - Large Team Distinguished Performance Award 
-
-
-- title: Open Source Projects
-  type: time_table
-  contents:
-    - title: <a href="https://github.com/mitre/strategy-mining">strategy mining</a>
-      year: 2015 
-      description: Strategy Mining is a framework, based on Evolutionary Model Discovery (EMD), to evolve and evaluate sets of plausible characteristics and behavior rules that drive the behavior of entities of interest.
-
-- title: Honors and Awards
-  type: time_table
-  contents:
-    - year: 2020 
-      items: 
-        - Science Undergraduate Laboratory Internship(SULI) Grant[US Department of Energy]
-        - Dean’s Award for College Service[St. John's College]
-           
-        
-    - year: 2018
-      items: 
-        - Robert Neidorf Memorial Scholarship for Academic Excellence[St. John's College]
-    - year: 2017
-      items: 
-        - Award for Relating Intense Education to Life(ARIEL) Grant 2017
-
-
-- title: Academic Interests
-  type: nested_list
-  contents:
-    - title: Digital Humanities
-      items: 
-      - Using computational techniques to understand the structure of discourse and social systems from greek tragedy to US common law
-
-    - title: Computational Social Sciences 
-      items:
-        - Applying complex systems science to social systems, studying social inequality and facility placement.
-
-- title: Other Interests
+- title: Grants & Awards
   type: list
   contents:
-    - <u>Hobbies:</u> unicycle riding,reading,baking,camping 
+    - Science Undergraduate Laboratory Internship (SULI) Grant — DOE (2020)
+    - MITRE Best Paper Incentive Prize (2022)
+    - Large Team Distinguished Performance Award — LANL (2022)
+    - 2nd Place, UVM Computing Student Research Day (2023)
+    - 3rd Place, UVM Computing Science Research Day (2022)
+    - Dean’s Award for College Service — St. John’s (2020)
+    - Robert Neidorf Memorial Scholarship (2018)
+    - ARIEL Grant — St. John’s College (2017)
+
+- title: Publications (Peer-Reviewed Journals)
+  type: list
+  contents:
+    - N. W. Landry, W. H. W. Thompson, L. Hébert-Dufresne, J.-G. Young. “Reconstructing networks from simple and complex contagions.” *Phys. Rev. E* **110** (4) L042301 (2024).
+    - A. A. Aguilar-Arevalo *et al.* “Testing meson portal dark sector solutions to the MiniBooNE anomaly at the Coherent CAPTAIN-Mills experiment.” *Phys. Rev. D* **109** (9) 095017 (2024).
+    - A. A. Aguilar-Arevalo *et al.* “Axion-Like Particles at Coherent CAPTAIN-Mills.” *Phys. Rev. D* **107** 095036 (2023).
+    - A. A. Aguilar-Arevalo *et al.* “First Leptophobic Dark Matter Search from Coherent CAPTAIN-Mills.” *Phys. Rev. Lett.* **129** 021801 (2022).
+    - A. A. Aguilar-Arevalo *et al.* “First dark matter search results from Coherent CAPTAIN-Mills.” *Phys. Rev. D* **106** 012001 (2022).
+    - M. Koehler *et al.* “The structure and dynamics of US common law.” *Front. Phys.* (Jan 2022).
+
+- title: Publications (Preprints)
+  type: list
+  contents:
+    - W. H. W. Thompson, Z. Wojitski, S. DeDeo. “Levy Flights of the Collective Imagination.” arXiv:1812.04013 [cs.SI].
+    - G. Salmon, W. H. W. Thompson, S. DeDeo. “Consilience and the cultural evolution of conceptual networks in London’s Royal Society.” *Proc. R. Soc. B* (in review).
+
+- title: Conference Proceedings
+  type: list
+  contents:
+    - W. Thompson *et al.* “Evolving Robust Facility Placements.” *Companion Proc. GECCO 2023*, pp. 775-778. doi: 10.1145/3583133.3590712.
+    - A. Isherwood *et al.* “Modeling Macaque Fighting Dynamics with the Evolutionary Model Discovery Framework.” *CSS Society Conference 2022*.
+
+- title: Talks
+  type: list
+  contents:
+    - “Inferring Interaction Kernels in Stochastic Opinion Dynamics Models” — NetSci 2024, Québec City
+    - “Understanding Polarization in the Higher-Order Non-Linear Voter Model” — Dynamics Days 2024, Davis CA
+    - “The Emergence of Polarization in the Non-Linear Voter Model on Higher-Order Networks” — Joint Mathematics Meetings 2024, San Francisco CA
+    - “Evolving Robust Facility Placements” — GECCO 2023, Lisbon Portugal
+    - “Coherent CAPTAIN-Mills Dark Matter Search” — Magnificent CEvNS 2021 (virtual)
+
+- title: Outreach & Service
+  type: list
+  contents:
+    - Peer Reviewer, *Physical Review E* (Nov 2024)
+    - Guest lecture “Introduction to Network Science”, Data Science 1, UVM (Nov 2024)
+    - Series of public talks on percolation and complex systems (2024)
+
+- title: Technical Skills
+  type: list
+  contents:
+    - Programming Languages — Julia, Python, C++
+    - Frameworks / Libraries — PyTorch, ROOT
+    - Other — UNIX systems, MySQL, MongoDB
+
+- title: Open-Soucre Projects
+  type: time_table
+  contents:
+    - title: strategy-mining
+      year: 2020
+      description: Evolutionary framework for agent-based modeling (NetLogo / MASON)
+
+- title: References
+  type: list
+  contents:
+    - Peter Dodds — Professor, Vermont Complex Systems Center, UVM — pdodds@uvm.edu
+    - Richard Van De Water — Staff Scientist, LANL — vdwater@lanl.gov
+    - Simon DeDeo — Assistant Professor, Carnegie Mellon University — sdedeo@andrew.cmu.edu
+    - Matthew Koehler — Applied Complexity Scientist, MITRE Corporation — (contact via author)

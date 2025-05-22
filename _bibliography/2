@@ -6,18 +6,20 @@ title: blank # the website title (if blank, full name will be used instead)
 first_name: William 
 middle_name: H. W.  
 last_name: Thompson 
-email: # removed
+email: you@example.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
-keywords: will, thompson, will-h-w-thompson, will-hw-thompson,uvm,william-hw-thompson,william-hunter-winkel-thompson,uvm,university-of-vermont,personal-website,complex-systems,vermont-complex-systems-center,computational-social-science,will-thompson  # add your own keywords or leave empty
+  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
+  Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
+keywords: jekyll, jekyll-theme, academic-website, portfolio-website  # add your own keywords or leave empty
 
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: logo2.png  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: ⚛️  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
-url: https://www.willhwthompson.com # the base hostname & protocol for your site
-baseurl: "" # the subpath of your site, e.g. /blog/
+url: http://willhwthompson.github.io/ # the base hostname & protocol for your site
+baseurl:  # the subpath of your site, e.g. /blog/
 last_updated: false # set to true if you want to display last updated in the footer
 impressum_path:  # set to path to include impressum link in the footer, use the same path as permalink in a page, helps to conform with EU GDPR
 
@@ -67,15 +69,14 @@ og_image: # The site-wide (default for all links) Open Graph preview image
 
 github_username: willhwthompson # your GitHub user name
 gitlab_username: # your GitLab user name
-twitter_username: # your Twitter handle
+twitter_username: Will_H_Thompson # your Twitter handle
 mastodon_username: # your mastodon instance+username in the format instance.tld/@username
-bluesky_username: willthompson.bsky.social # your Bluesky username without the @
-linkedin_username: # your LinkedIn user name
+linkedin_username: willhwthompson # your LinkedIn user name
 telegram_username: # your Telegram user name
-#scholar_userid: 0swe92IAAAAJ&hl # your Google Scholar ID
+scholar_userid: # your Google Scholar ID
 semanticscholar_id: # your Semantic Scholar ID
 whatsapp_number: # your WhatsApp number (full phone number in international format. Omit any zeroes, brackets, or dashes when adding the phone number in international format.)
-orcid_id: # your ORCID ID
+orcid_id: 0000-0002-1893-240X # your ORCID ID
 medium_username: # your Medium username
 quora_username: # your Quora username
 publons_id: # your ID on Publons
@@ -96,7 +97,7 @@ facebook_id: # your facebook id
 discord_id: # your discord id (18-digit unique numerical identifier)
 
 contact_note: >
-  Email is the best way to get in touch with me: wthomps3 (at) uvm (dot) edu.
+  Email is the best way to get in touch with me. 
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification
@@ -112,7 +113,7 @@ bing_site_verification:  # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: commentarius perpetuus  # blog_name will be displayed in your blog page
+blog_name: Perpetuum Comentarium  # blog_name will be displayed in your blog page
 blog_nav_title: blog # your blog must have a title for it to be displayed in the nav bar
 blog_description: collected ramblings
 permalink: /blog/:year/:title/
@@ -125,10 +126,10 @@ pagination:
 # Follow instructions on https://giscus.app/ to setup for your repo to fill out
 # the information below.
 giscus:
-  repo: WillHWThompson/WillHWThompson.github.io      # <your-github-user-name>/<your-github-repo-name>
-  repo_id: MDEwOlJlcG9zaXRvcnk2MDAyNDM2NQ==          # You'll need to update this with your own repo ID if you want to use giscus
+  repo: alshedivat/al-folio      # <your-github-user-name>/<your-github-repo-name>
+  repo_id: MDEwOlJlcG9zaXRvcnk2MDAyNDM2NQ==
   category: Comments             # name of the category under which discussions will be created
-  category_id: DIC_kwDOA5PmLc4CTBt6                 # You'll need to update this with your own category ID if you want to use giscus
+  category_id: DIC_kwDOA5PmLc4CTBt6
   mapping: title                 # identify discussions by post title
   strict: 1                      # use strict identification mode
   reactions_enabled: 1           # enable (1) or disable (0) emoji reactions
@@ -146,9 +147,9 @@ disqus_shortname: al-folio # put your disqus shortname
 # you can display them in your blog by adding a link to the RSS feed.
 external_sources:
   #- name: medium.com
-  #  rss_url: https://medium.com/@will.w.thompson/feed
-  #- name: substack.com 
-  #  rss_url: https://willthompson.substack.com/feed
+  #rss_url: https://medium.com/@will.w.thompson/feed
+  - name: substack.com 
+    rss_url: https://willthompson.substack.com/feed 
 # -----------------------------------------------------------------------------
 # Collections
 # -----------------------------------------------------------------------------
@@ -164,7 +165,7 @@ collections:
     permalink: /projects/:path/
 
 news_scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-news_limit:  # leave blank to include all the news in the `_news` folder
+news_limit: 5 # leave blank to include all the news in the `_news` folder
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
@@ -198,7 +199,7 @@ keep_files:
 # Plug-ins
 plugins:
   - jekyll-archives
-  # - jekyll-diagrams  # Removed to fix dependency issues
+  - jekyll-diagrams
   - jekyll-email-protect
   - jekyll-feed
   - jekyll-imagemagick
@@ -256,8 +257,7 @@ scholar:
   locale: en
 
   source: /_bibliography/
-  bibliography: papers3.bib
-
+  bibliography: papers.bib
   bibliography_template: bib
   # Note: if you have latex math in your bibtex, the latex filter
   # preprocessing may conflict with MathJAX if the latter is enabled.
@@ -317,9 +317,9 @@ imagemagick:
 # Jekyll Diagrams
 # -----------------------------------------------------------------------------
 
-# jekyll-diagrams: 
-#     # configuration, see https://github.com/zhustec/jekyll-diagrams.
-#     # Removed to fix dependency issues
+jekyll-diagrams:
+    # configuration, see https://github.com/zhustec/jekyll-diagrams.
+    # feel free to comment out this section if not using jekyll diagrams.
 
 
 # -----------------------------------------------------------------------------

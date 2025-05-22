@@ -1,13 +1,19 @@
-version: "3"
 # this file uses prebuilt image in dockerhub
 services:
   jekyll:
-    image: amirpourmand/al-folio
+    # Switch to building from local Dockerfile instead of using prebuilt image
+    build: .  # build context is the project root
     container_name: al-folio-website
     command: bash -c "
-      rm -f Gemfile.lock
-      && bundler exec jekyll serve --watch --port=8080 --host=0.0.0.0 --livereload --verbose"
+      bundle install --jobs 4 --retry 3
+      && rm -f Gemfile.lock
+      && bundle exec jekyll serve --watch --port=4000 --host=0.0.0.0 --livereload --verbose"
     ports:
-      - 8080:8080
+      - 4000:4000  # map host port 4000 to container port 4000
     volumes:
       - .:/srv/jekyll
+      - bundle:/srv/jekyll/vendor/bundle
+
+# Define named volumes
+volumes:
+  bundle: {}

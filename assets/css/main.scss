@@ -13,3 +13,6 @@ $max-content-width: {{ site.max_width }};
   "base",
   "distill"
 ;
+
+// Custom CSS imports
+@import "custom-icons";

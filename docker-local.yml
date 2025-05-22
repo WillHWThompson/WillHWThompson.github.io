@@ -11,3 +11,7 @@ services:
       - 8080:8080
     volumes:
       - .:/srv/jekyll
+      - bundle:/srv/jekyll/vendor/bundle
+
+volumes:
+  bundle: {}

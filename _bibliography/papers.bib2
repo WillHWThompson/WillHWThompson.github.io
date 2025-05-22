@@ -1,0 +1,111 @@
+
+@article{adusumilli_structure_2022,
+	title = {The {Structure} and {Dynamics} of {Modern} {United} {States} {Federal} {Case} {Law}},
+	volume = {9},
+	issn = {2296-424X},
+	url = {https://www.frontiersin.org/articles/10.3389/fphy.2021.695219},
+	abstract = {The structure and dynamics of modern United States Federal Case Law are examined here. The analyses utilize large-scale network analysis tools, natural language processing techniques, and information theory to examine all the federal opinions in the Court Listener database, containing approximately 1.3 million judicial opinions and 11.4 million citations. The analyses are focused on modern United States Federal Case Law, as cases in the Court Listener database range from approximately 1926–2020 and include most Federal jurisdictions. We examine the data set from a structural perspective using the citation network, overall and by time and space (jurisdiction). In addition to citation structure, we examine the dataset from a topical and information theoretic perspective, again, overall and by time and space.},
+	urldate = {2022-12-24},
+	journal = {Frontiers in Physics},
+	author = {Adusumilli, Keerthi and Brown, Bradford and Harrison, Joey and Koehler, Matthew and Kutarnia, Jason and Michel, Shaun and Olivier, Max and Pfeifer, Craig and Slater, Zoryanna and Thompson, William and Vetter, Dianna and Zacharowicz, Renee},
+	year = {2022},
+	file = {common_law.pdf},
+	altmetric={120576807},
+	html={https://www.frontiersin.org/articles/10.3389/fphy.2021.695219},
+	preview={law_pic.png},
+	doi={10.3389/fphy.2021.695219},
+}
+
+@article{ccm_collaboration_first_2022,
+	title = {First dark matter search results from {Coherent} {CAPTAIN}-{Mills}},
+	volume = {106},
+	url = {https://link.aps.org/doi/10.1103/PhysRevD.106.012001},
+	doi = {10.1103/PhysRevD.106.012001},
+	abstract = {This paper describes the operation of the Coherent CAPTAIN-Mills (CCM) detector located at the Los Alamos Neutron Science Center at Los Alamos National Laboratory. CCM is a 10-ton liquid argon detector located 20 meters from a high flux neutron/neutrino source and is designed to search for sterile neutrinos (νs’s) and light dark matter (LDM). An engineering run was performed in fall 2019 to study the characteristics of the CCM120 detector by searching for coherent scattering signals consistent with νs’s and LDM resulting from the production and decays of π+ and π0 in the tungsten target. New parameter space in a leptophobic dark matter (DM) model was excluded for DM masses between ∼2.0 and 30 MeV. The lessons learned from this run have guided the development and construction of the new CCM200 detector that will begin operations in 2021 and significantly improve on these searches.},
+	number = {1},
+	urldate = {2022-12-24},
+	journal = {Physical Review D},
+	author = {{CCM Collaboration} and Aguilar-Arevalo, A. A. and Alves, D. S. M. and Biedron, S. and Boissevain, J. and Borrego, M. and Chavez-Estrada, M. and Chavez, A. and Conrad, J. M. and Cooper, R. L. and Diaz, A. and Distel, J. R. and D’Olivo, J. C. and Dunton, E. and Dutta, B. and Elliott, A. and Evans, D. and Fields, D. and Greenwood, J. and Gold, M. and Gordon, J. and Guarincerri, E. and Huang, E. C. and Kamp, N. and Kelsey, C. and Knickerbocker, K. and Lake, R. and Louis, W. C. and Mahapatra, R. and Maludze, S. and Mirabal, J. and Moreno, R. and Neog, H. and de Niverville, P. and Pandey, V. and Plata-Salas, J. and Poulson, D. and Ray, H. and Renner, E. and Schaub, T. J. and Shaevitz, M. H. and Smith, D. and Sondheim, W. and Szelc, A. M. and Taylor, C. and Thompson, W. H. and Thornton, R. T. and Tripathi, M. and Van Berg, R. and Van de Water, R. G. and Verma, S. and Walker, K.},
+	month = jul,
+	year = {2022},
+	note = {Publisher: American Physical Society},
+	pages = {012001},
+	file = {PhysRevD.106.012001},
+	html = {https://link.aps.org/doi/10.1103/PhysRevD.106.012001},
+	publisher={aps},
+	doi={aps},
+	altmetric={106738032},
+	preview={prd_shot.png},
+}
+
+@article{ccm_collaboration_first_2022-1,
+	title = {First {Leptophobic} {Dark} {Matter} {Search} from the {Coherent}--{CAPTAIN}-{Mills} {Liquid} {Argon} {Detector}},
+	volume = {129},
+	url = {https://link.aps.org/doi/10.1103/PhysRevLett.129.021801},
+	doi = {10.1103/PhysRevLett.129.021801},
+	abstract = {We report the first results of a search for leptophobic dark matter (DM) from the Coherent–CAPTAIN-Mills (CCM) liquid argon (LAr) detector. An engineering run with 120 photomultiplier tubes (PMTs) and 17.9×1020 protons on target (POT) was performed in fall 2019 to study the characteristics of the CCM detector. The operation of this 10-ton detector was strictly light based with a threshold of 50 keV and used coherent elastic scattering off argon nuclei to detect DM. Despite only 1.5 months of accumulated luminosity, contaminated LAr, and nonoptimized shielding, CCM’s first engineering run has already achieved sensitivity to previously unexplored parameter space of light dark matter models with a baryonic vector portal. With an expected background of 115 005 events, we observe 115 005+16.5 events which is compatible with background expectations. For a benchmark mediator-to-DM mass ratio of mVB/mχ=2.1, DM masses within the range 9 MeV≲mχ≲50 MeV are excluded at 90\% C. L. in the leptophobic model after applying the Feldman-Cousins test statistic. CCM’s upgraded run with 200 PMTs, filtered LAr, improved shielding, and 10 times more POT will be able to exclude the remaining thermal relic density parameter space of this model, as well as probe new parameter space of other leptophobic DM models.},
+	number = {2},
+	urldate = {2022-12-24},
+	journal = {Physical Review Letters},
+	author = {{CCM Collaboration} and Aguilar-Arevalo, A. A. and Alves, D. S. M. and Biedron, S. and Boissevain, J. and Borrego, M. and Chavez-Estrada, M. and Chavez, A. and Conrad, J. M. and Cooper, R. L. and Diaz, A. and Distel, J. R. and D’Olivo, J. C. and Dunton, E. and Dutta, B. and Elliott, A. and Evans, D. and Fields, D. and Greenwood, J. and Gold, M. and Gordon, J. and Guarincerri, E. and Huang, E. C. and Kamp, N. and Kelsey, C. and Knickerbocker, K. and Lake, R. and Louis, W. C. and Mahapatra, R. and Maludze, S. and Mirabal, J. and Moreno, R. and Neog, H. and deNiverville, P. and Pandey, V. and Plata-Salas, J. and Poulson, D. and Ray, H. and Renner, E. and Schaub, T. J. and Shaevitz, M. H. and Smith, D. and Sondheim, W. and Szelc, A. M. and Taylor, C. and Thompson, W. H. and Thornton, R. T. and Tripathi, M. and Van Berg, R. and Van de Water, R. G. and Verma, S. and Walker, K.},
+	month = jul,
+	year = {2022},
+	note = {Publisher: American Physical Society},
+	pages = {021801},
+	html = {https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.129.021801},
+	altmetric = {114248101},
+}
+
+@misc{https://doi.org/10.48550/arxiv.2112.09979,
+  title={Axion-Like Particles at Coherent CAPTAIN-Mills}
+  doi = {10.48550/ARXIV.2112.09979},
+  url = {https://arxiv.org/abs/2112.09979},
+  html = {https://arxiv.org/abs/2112.09979},
+  author = {Aguilar-Arevalo, A. A. and Alves, D. S. M. and Biedron, S. and Boissevain, J. and Borrego, M. and Bugel, L. and Chavez-Estrada, M. and Conrad, J. M. and Cooper, R. L. and Diaz, A. and Distel, J. R. and D'Olivo, J. C. and Dunton, E. and Dutta, B. and Fields, D. and Gochanour, J. R. and Gold, M. and Guardincerri, E. and Huang, E. C. and Kamp, N. and Kim, D. and Knickerbocker, K. and Louis, W. C. and Lyles, J. T. M. and Mahapatra, R. and Maludze, S. and Mirabal, J. and Mishra, N. and Newmark, D. and deNiverville, P. and Pandey, V. and Poulson, D. and Ray, H. and Renner, E. and Schaub, T. J. and Schneider, A. and Shaevitz, M. H. and Smith, D. and Sondheim, W. and Szelc, A. M. and Taylor, C. and Thompson, A. and Thompson, W. H. and Tripathi, M. and Thornton, R. T. and Van Berg, R. and Van de Water, R. G. and Verma, S.},
+abstract={We show results from the Coherent CAPTAIN Mills (CCM) 2019 engineering run which begin to constrain regions of parameter space for axion-like particles (ALPs) produced in electromagnetic particle showers in an 800 MeV proton beam dump, and further investigate the sensitivity of ongoing data-taking campaigns for the CCM200 upgraded detector. Based on beam-on background estimates from the engineering run, we make realistic extrapolations for background reduction based on expected shielding improvements, reduced beam width, and analysis-based techniques for background rejection. We obtain reach projections for two classes of signatures; ALPs coupled primarily to photons can be produced in the tungsten target via the Primakoff process, and then produce a gamma-ray signal in the Liquid Argon (LAr) CCM detector either via inverse Primakoff scattering or decay to a photon pair. ALPs with significant electron couplings have several additional production mechanisms (Compton scattering, e+e− annihilation, ALP-bremsstrahlung) and detection modes (inverse Compton scattering, external e+e− pair conversion, and decay to e+e−). In some regions, the constraint is marginally better than both astrophysical and terrestrial constraints. With the beginning of a three year run, CCM will be more sensitive to this parameter space by up to an order of magnitude for both ALP-photon and ALP-electron couplings. The CCM experiment will also have sensitivity to well-motivated parameter space of QCD axion models. It is only a recent realization that accelerator-based large volume liquid argon detectors designed for low energy coherent neutrino and dark matter scattering searches are also ideal for probing ALPs in the unexplored ∼MeV mass scale. },
+
+  keywords = {High Energy Physics - Phenomenology (hep-ph), High Energy Physics - Experiment (hep-ex), FOS: Physical sciences, FOS: Physical sciences},
+
+  title = {Axion-Like Particles at Coherent CAPTAIN-Mills},
+
+  publisher = {arXiv},
+
+  year = {2021},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+
+
+
+@techreport{thompson_coherent_2021,
+	title = {Coherent {Captain} {Mills} {CCM} 200 {Upgrade}},
+	url = {https://www.osti.gov/biblio/1812615},
+	abstract = {The U.S. Department of Energy's Office of Scientific and Technical Information},
+	language = {English},
+	number = {LA-UR-21-27778},
+	urldate = {2022-12-24},
+	institution = {Los Alamos National Lab. (LANL), Los Alamos, NM (United States)},
+	author = {Thompson, William H. W.},
+	month = aug,
+	year = {2021},
+	file = {Full Text PDF:/Users/willthompson/Zotero/storage/MTKZUEI5/Thompson - 2021 - Coherent Captain Mills CCM 200 Upgrade.pdf:application/pdf},
+}
+
+
+
+@misc{thompson_levy_2018,
+	title = {Levy {Flights} of the {Collective} {Imagination}},
+	url = {http://arxiv.org/abs/1812.04013},
+	doi = {10.48550/arXiv.1812.04013},
+	abstract = {We present a structured random-walk model that captures key aspects of how people communicate in groups. Our model takes the form of a correlated Levy flight that quantifies the balance between focused discussion of an idea and long-distance leaps in semantic space. We apply our model to three cases of increasing structural complexity: philosophical texts by Aristotle, Hume, and Kant; four days of parliamentary debate during the French Revolution; and branching comment trees on the discussion website Reddit. In the philosophical and parliamentary cases, the model parameters that describe this balance converge under coarse-graining to limit regions that demonstrate the emergence of large-scale structure, a result which is robust to translation between languages. Meanwhile, we find that the political forum we consider on Reddit exhibits a debate-like pattern, while communities dedicated to the discussion of science and news show much less temporal order, and may make use of the emergent, tree-like topology of comment replies to structure their epistemic explorations. Our model allows us to quantify the ways in which social technologies such as parliamentary procedures and online commenting systems shape the joint exploration of ideas.},
+	urldate = {2022-12-24},
+	publisher = {arXiv},
+	author = {Thompson, William H. W. and Wojtowicz, Zachary and DeDeo, Simon},
+	month = dec,
+	year = {2018},
+	note = {arXiv:1812.04013 [nlin, physics:physics]},
+	keywords = {Computer Science - Computation and Language, Computer Science - Social and Information Networks, Nonlinear Sciences - Adaptation and Self-Organizing Systems, Physics - Physics and Society},
+	file = {levy_flights.pdf},
+	selected={true},
+	html={https://arxiv.org/abs/1812.04013},
+	preview={levy_flights_image.png}
+}
