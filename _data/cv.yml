@@ -114,10 +114,3 @@
       year: 2020
       description: Evolutionary framework for agent-based modeling (NetLogo / MASON)
 
-- title: References
-  type: list
-  contents:
-    - Peter Dodds — Professor, Vermont Complex Systems Center, UVM — pdodds@uvm.edu
-    - Richard Van De Water — Staff Scientist, LANL — vdwater@lanl.gov
-    - Simon DeDeo — Assistant Professor, Carnegie Mellon University — sdedeo@andrew.cmu.edu
-    - Matthew Koehler — Applied Complexity Scientist, MITRE Corporation — (contact via author)
