@@ -14,6 +14,6 @@
 /* Light mode: black Bluesky icon (default) */
 
 /* Dark mode: white Bluesky icon for visibility */
-.dark .fa-bluesky {
+html[data-theme="dark"] .fa-bluesky {
   filter: invert(1);
 }
