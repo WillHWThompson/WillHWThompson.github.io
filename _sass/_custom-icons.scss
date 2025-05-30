@@ -9,13 +9,13 @@
   background-position: center;
   /* Fix for vertical alignment and size */
   vertical-align: -0.125em;
-  /* Make it blue like the Bluesky brand color */
-  filter: hue-rotate(200deg) saturate(2) brightness(1.2);
+  /* Convert black to Bluesky blue (#1185fe) */
+  filter: invert(30%) sepia(100%) saturate(500%) hue-rotate(200deg) brightness(1.3);
 }
 
 /* Light mode: blue Bluesky icon */
 
 /* Dark mode: lighter blue Bluesky icon for better visibility */
 .dark .fa-bluesky {
-  filter: hue-rotate(200deg) saturate(1.5) brightness(0.8);
+  filter: invert(30%) sepia(100%) saturate(300%) hue-rotate(200deg) brightness(1.1);
 }
