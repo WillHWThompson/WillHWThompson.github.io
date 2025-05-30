@@ -3,19 +3,17 @@
   display: inline-block;
   width: 1em;
   height: 1em;
-  background-image: url('../img/social/bluesky.svg');
+  background-image: url('../img/social/bluesky-blue.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   /* Fix for vertical alignment and size */
   vertical-align: -0.125em;
-  /* Convert black to Bluesky blue (#1185fe) */
-  filter: invert(30%) sepia(100%) saturate(500%) hue-rotate(200deg) brightness(1.3);
 }
 
 /* Light mode: blue Bluesky icon */
 
-/* Dark mode: lighter blue Bluesky icon for better visibility */
+/* Dark mode: slightly lighter blue Bluesky icon for better visibility */
 .dark .fa-bluesky {
-  filter: invert(30%) sepia(100%) saturate(300%) hue-rotate(200deg) brightness(1.1);
+  filter: brightness(1.2);
 }
