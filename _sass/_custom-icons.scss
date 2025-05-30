@@ -3,7 +3,25 @@
   display: inline-block;
   width: 1em;
   height: 1em;
-  background-image: url('../img/social/bluesky-blue.svg');
+  background-image: url('../img/social/bluesky.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* Fix for vertical alignment and size */
+  vertical-align: -0.125em;
+}
+
+/* Light mode: black Bluesky icon (default) */
+
+/* Dark mode: white Bluesky icon for visibility */
+.dark .fa-bluesky {
+  filter: invert(1);
+}dia icons */
+.fa-bluesky {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-image: url('../img/social/bluesky.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
