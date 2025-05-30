@@ -112,9 +112,9 @@ bing_site_verification:  # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: commentarius perpetuus  # blog_name will be displayed in your blog page
+blog_name: The Plectics Perspective  # blog_name will be displayed in your blog page
 blog_nav_title: blog # your blog must have a title for it to be displayed in the nav bar
-blog_description: collected ramblings
+blog_description: Thoughts on complex systems, philosphy and physics. 
 permalink: /blog/:year/:title/
 
 # Pagination
