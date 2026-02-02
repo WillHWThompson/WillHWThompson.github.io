@@ -28,89 +28,156 @@
     - title: Graduate Research Assistant
       institution: University of Vermont
       location: Burlington, VT
-      year: 2022 – Present
+      year: Aug 2022 – Present
+      description:
+        - Developed a Fourier-space representation for Bayesian Neural Networks (BNNs) to enable exact, sampling-free inference and learning, bypassing computational bottlenecks of MCMC.
+        - Designed non-parametric Bayesian models for contagion processes, enabling the simultaneous joint reconstruction of network topology and spreading dynamics from time-series data.
+        - Engineered a Graph Machine Learning (GML) pipeline to infer latent interaction kernels governing stochastic network dynamics.
+    - title: Graduate Research Intern
+      institution: Los Alamos National Laboratory
+      location: Los Alamos, NM
+      year: Jun 2025 – Oct 2025
+      description:
+        - Developed BPTuning, a high-performance Julia framework for graphical model inference on loopy graphs.
+        - Derived a proof of optimality for a method that optimizes effective parameters to cancel out Belief Propagation (BP) approximation errors on cyclic topologies.
+        - Implemented a reconstruction-based objective function to serve as a tractable proxy for exact likelihood maximization.
+    - title: Lead Data Scientist
+      institution: Zoodiker
+      location: Remote
+      year: Apr 2023 – Jan 2025
+      description:
+        - Engineered an end-to-end NLP pipeline to process screenplay text, utilizing sentiment analysis and structural extraction algorithms to quantify narrative arcs.
+        - Designed anomaly detection heuristics to correlate specific character dynamics with reader engagement deviations.
+        - Implemented a full-stack analytics dashboard (SQL/React/Python) to visualize high-dimensional text features.
+        - "Patent Pending: Filed for novel techniques in automated narrative structural analysis."
     - title: Post-Baccalaureate Researcher
       institution: Los Alamos National Laboratory
       location: Los Alamos, NM
-      year: 2021 – Present
+      year: Jan 2021 – Aug 2022
+      description:
+        - Developed a 200+ unit photon detection system for the Coherent Captain Mills (CCM) particle physics experiment.
+        - Enhanced the data acquisition system (DAQ), doubling capacity and improving stability for 10-ton scale data capture.
+        - Led the development of detector control software, integrating sensor arrays and automated emergency alerts.
     - title: Data Scientist
       institution: MITRE Corporation
       location: Santa Fe, NM
       year: Aug 2020 – Dec 2020
-    - title: Head Senior Lab Assistant
-      institution: St. John’s College
-      location: Santa Fe, NM
-      year: May 2019 – May 2021
+      description:
+        - Applied complex systems science to analyze satellite network structures and mitigate failure cascades.
+        - Co-developed Strategy Mining, an open-source genetic programming tool for evolving Agent-Based Models (ABMs).
+        - Conducted semantic analysis of judicial documents to improve legal search accuracy.
     - title: Undergraduate Research Fellow
       institution: Carnegie Mellon University
       location: Pittsburgh, PA
       year: Jun 2018 – Aug 2018
+      description:
+        - Executed a research project on the structural analysis of philosophical texts using NLP and Random Walk algorithms; findings published as first author.
     - title: Undergraduate Researcher
       institution: Santa Fe Institute
       location: Santa Fe, NM
       year: Jun 2017 – Jun 2018
+      description:
+        - Conducted independent research using NLP and machine learning to explore the narrative function of the chorus in Greek tragedies.
 
 - title: Grants & Awards
   type: list
   contents:
-    - Science Undergraduate Laboratory Internship (SULI) Grant — DOE (2020)
-    - MITRE Best Paper Incentive Prize (2022)
-    - Large Team Distinguished Performance Award — LANL (2022)
-    - 2nd Place, UVM Computing Student Research Day (2023)
-    - 3rd Place, UVM Computing Science Research Day (2022)
-    - Dean’s Award for College Service — St. John’s (2020)
+    - "Second Place, University of Vermont Computing Student Research Day (2023) — Presented research on developing learnable asynchronous models of opinion dynamics."
+    - "Third Place, University of Vermont Computing Science Research Day (2022) — Awarded for research employing evolutionary algorithms to develop robust facility placements."
+    - "MITRE Best Paper Incentive Prize (2022) — Paper 'The Structure and Dynamics of US Common Law' recognized as best out of hundreds published that year."
+    - "Large Team Distinguished Performance Award, LANL (2022) — Recognized for construction and dark matter search leadership with Coherent Captain Mills Detector."
+    - "Science Undergraduate Laboratory Internship (SULI) Grant, DOE (2020) — Selective DOE grant for post-baccalaureate research at LANL."
+    - "Dean's Award for College Service, St. John's College (2020) — Recognized for exceptional leadership and dedication."
     - Robert Neidorf Memorial Scholarship (2018)
-    - ARIEL Grant — St. John’s College (2017)
-
-- title: Publications (Peer-Reviewed Journals)
-  type: list
-  contents:
-    - N. W. Landry, W. H. W. Thompson, L. Hébert-Dufresne, J.-G. Young. “Reconstructing networks from simple and complex contagions.” *Phys. Rev. E* **110** (4) L042301 (2024).
-    - A. A. Aguilar-Arevalo *et al.* “Testing meson portal dark sector solutions to the MiniBooNE anomaly at the Coherent CAPTAIN-Mills experiment.” *Phys. Rev. D* **109** (9) 095017 (2024).
-    - A. A. Aguilar-Arevalo *et al.* “Axion-Like Particles at Coherent CAPTAIN-Mills.” *Phys. Rev. D* **107** 095036 (2023).
-    - A. A. Aguilar-Arevalo *et al.* “First Leptophobic Dark Matter Search from Coherent CAPTAIN-Mills.” *Phys. Rev. Lett.* **129** 021801 (2022).
-    - A. A. Aguilar-Arevalo *et al.* “First dark matter search results from Coherent CAPTAIN-Mills.” *Phys. Rev. D* **106** 012001 (2022).
-    - M. Koehler *et al.* “The structure and dynamics of US common law.” *Front. Phys.* (Jan 2022).
+    - ARIEL Grant — St. John's College (2017)
 
 - title: Publications (Preprints)
   type: list
   contents:
-    - W. H. W. Thompson, Z. Wojitski, S. DeDeo. “Levy Flights of the Collective Imagination.” arXiv:1812.04013 [cs.SI].
-    - G. Salmon, W. H. W. Thompson, S. DeDeo. “Consilience and the cultural evolution of conceptual networks in London’s Royal Society.” *Proc. R. Soc. B* (in review).
+    - M. C. Boudreau, W. H. W. Thompson, C. M. Danforth, J.-G. Young, L. Hébert-Dufresne. "[Sensitivity analysis of epidemic forecasting and spreading on networks with probability generating functions](https://arxiv.org/abs/2506.24103)." arXiv:2506.24103 (2025).
+    - W. H. W. Thompson, Z. Wojtowicz, S. DeDeo. "[Levy Flights of the Collective Imagination](https://arxiv.org/abs/1812.04013)." arXiv:1812.04013 (2018).
+
+- title: Publications (Peer-Reviewed Journals)
+  type: list
+  contents:
+    - A. A. Aguilar-Arevalo *et al.* "First Event-by-Event Identification of Cherenkov Radiation from Sub-Mev Particles in Liquid Argon." *Phys. Rev. Lett.* **135** (17) 171804 (2025).
+    - A. A. Aguilar-Arevalo *et al.* "Measurement of the liquid argon scintillation pulse shape using differentiable simulation in the coherent CAPTAIN-Mills experiment." *Phys. Rev. D* **112** (7) 072010 (2025).
+    - N. W. Landry, W. H. W. Thompson, L. Hébert-Dufresne, J.-G. Young. "[Reconstructing networks from simple and complex contagions](https://doi.org/10.1103/PhysRevE.110.L042301)." *Phys. Rev. E* **110** (4) L042301 (2024).
+    - A. A. Aguilar-Arevalo *et al.* "[Testing meson portal dark sector solutions to the MiniBooNE anomaly at the Coherent CAPTAIN-Mills experiment](https://doi.org/10.1103/PhysRevD.109.095017)." *Phys. Rev. D* **109** (9) 095017 (2024).
+    - A. A. Aguilar-Arevalo *et al.* "[Axion-Like Particles at Coherent CAPTAIN-Mills](https://doi.org/10.1103/PhysRevD.107.095036)." *Phys. Rev. D* **107** 095036 (2023).
+    - A. A. Aguilar-Arevalo *et al.* "[First Leptophobic Dark Matter Search from Coherent CAPTAIN-Mills](https://doi.org/10.1103/PhysRevLett.129.021801)." *Phys. Rev. Lett.* **129** 021801 (2022).
+    - A. A. Aguilar-Arevalo *et al.* "[First dark matter search results from Coherent CAPTAIN-Mills](https://doi.org/10.1103/PhysRevD.106.012001)." *Phys. Rev. D* **106** 012001 (2022).
+    - M. Koehler *et al.* "The structure and dynamics of US common law." *Front. Phys.* (Jan 2022).
 
 - title: Conference Proceedings
   type: list
   contents:
-    - W. Thompson *et al.* “Evolving Robust Facility Placements.” *Companion Proc. GECCO 2023*, pp. 775-778. doi: 10.1145/3583133.3590712.
-    - A. Isherwood *et al.* “Modeling Macaque Fighting Dynamics with the Evolutionary Model Discovery Framework.” *CSS Society Conference 2022*.
+    - W. Thompson *et al.* "[Evolving Robust Facility Placements](https://doi.org/10.1145/3583133.3590712)." *Companion Proc. GECCO 2023*, pp. 775-778.
+    - A. Isherwood, W. Thompson, *et al.* "[Modeling Macaque Fighting Dynamics with the Evolutionary Model Discovery Framework](https://doi.org/10.1007/978-3-031-37553-8_9)." *CSS Society Conference 2022*.
 
-- title: Talks
+- title: Teaching & Mentorship
+  type: time_table
+  contents:
+    - title: Graduate Research Mentor
+      institution: University of Vermont
+      location: Burlington, VT
+      year: 2023 – Present
+      description:
+        - Directed a research cohort of 5 undergraduate interns over two semesters; managed the development of a Machine Learning pipeline to detect student-authored news content across hundreds of U.S. publications.
+        - Mentored summer interns on individual projects in network science and complex systems.
+        - "Guest Lecturer: Delivered lectures on 'Introduction to Network Science,' 'Stochastic Cellular Automata,' and 'Chaos & Fractals' for graduate and undergraduate courses."
+    - title: Post-Baccalaureate Mentor
+      institution: Los Alamos National Laboratory
+      location: Los Alamos, NM
+      year: Summers 2021, 2022
+      description:
+        - Supervised undergraduate interns during two consecutive summer sessions, providing technical guidance on C++ development and detector hardware calibration.
+        - Facilitated onboarding for new researchers, training them on laboratory safety protocols and data acquisition software.
+    - title: Head Senior Lab Assistant
+      institution: St. John's College
+      location: Santa Fe, NM
+      year: May 2019 – May 2021
+      description:
+        - Directed the setup and instructional design of a tabletop quantum optics lab and trained junior assistants in experimental protocols.
+
+- title: Selected Talks
+  type: nested_list
+  contents:
+    - title: Invited Seminars
+      items:
+        - "The Emergence of Inequality with Two Models of Social Dynamics — Dartmouth College Applied Math Seminar Series, Hanover, NH (Oct 2023)"
+        - "Understanding Polarization with the Non-Linear Voter Model on Higher Order Networks — Vermont-KIAS Workshop on Higher Order Interactions, Burlington, VT (Sept 2023)"
+        - "Searching for Light Dark Matter with Coherent Captain Mills — University of New Mexico NUPAC Colloquia Series, Albuquerque, NM (May 2021)"
+    - title: Conference Presentations
+      items:
+        - "Sensitivity of epidemic forecasts with statistical condition estimation — Dynamics Days 2025, Denver, CO (Poster)"
+        - "Inferring Interaction Kernels In Stochastic Opinion Dynamics Models — NetSci 2024, Québec City (Jun 2024)"
+        - "Understanding Polarization In the Higher Order Non-Linear Voter Model — Dynamics Days 2024, Davis, CA (Jan 2024)"
+        - "The Emergence of Polarization in the Non-Linear Voter Model on Higher Order Networks — Joint Mathematics Meeting 2024, San Francisco, CA (Jan 2024)"
+        - "Evolving Robust Facility Placements — GECCO 2023, Lisbon, Portugal (Jul 2023)"
+
+- title: Service & Outreach
   type: list
   contents:
-    - “Inferring Interaction Kernels in Stochastic Opinion Dynamics Models” — NetSci 2024, Québec City
-    - “Understanding Polarization in the Higher-Order Non-Linear Voter Model” — Dynamics Days 2024, Davis CA
-    - “The Emergence of Polarization in the Non-Linear Voter Model on Higher-Order Networks” — Joint Mathematics Meetings 2024, San Francisco CA
-    - “Evolving Robust Facility Placements” — GECCO 2023, Lisbon Portugal
-    - “Coherent CAPTAIN-Mills Dark Matter Search” — Magnificent CEvNS 2021 (virtual)
-
-- title: Outreach & Service
-  type: list
-  contents:
-    - Peer Reviewer, *Physical Review E* (Nov 2024)
-    - Guest lecture “Introduction to Network Science”, Data Science 1, UVM (Nov 2024)
-    - Series of public talks on percolation and complex systems (2024)
+    - "Peer Reviewer: Physical Review E (2024), NPJ Complexity (2024)"
+    - "Public Outreach: Delivered talks on 'The Mathematics of Making Coffee' and Percolation theory at Vermont State University (2024), Vermont Science Olympiad (2024), and UVM MATHCOUNTS (2024)"
 
 - title: Technical Skills
   type: list
   contents:
-    - Programming Languages — Julia, Python, C++
-    - Frameworks / Libraries — PyTorch, ROOT
-    - Other — UNIX systems, MySQL, MongoDB
+    - "Languages: Julia, Python, C++, SQL, Bash, LaTeX"
+    - "Machine Learning & Data: PyTorch, Flux.jl, NetworkX, SciPy, Pandas, Scikit-learn"
+    - "Methods: Bayesian Inference, Graph Neural Networks, MCMC, Agent-Based Modeling, NLP"
+    - "Tools: Git, Docker, UNIX/Linux, High-Performance Computing (HPC)"
 
-- title: Open-Soucre Projects
-  type: time_table
+- title: References
+  type: map
   contents:
-    - title: strategy-mining
-      year: 2020
-      description: Evolutionary framework for agent-based modeling (NetLogo / MASON)
-
+    - name: Peter Dodds
+      value: Professor, Complex Systems Center, University of Vermont — pdodds@uvm.edu
+    - name: Richard Van De Water
+      value: Staff Scientist, P-2 Pure and Applied Physics, Los Alamos National Labs — vdwater@lanl.gov
+    - name: Simon DeDeo
+      value: Assistant Professor, Carnegie Mellon University — sdedeo@andrew.cmu.edu
+    - name: Matthew Koehler
+      value: Applied Complexity Scientist, MITRE Corporation — mkoehler@mitre.org

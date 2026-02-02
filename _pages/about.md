@@ -24,7 +24,14 @@ I received a **B.A. in the Liberal Arts** from [St. John’s College](https://ww
 
 ## research
 
-My research centers on how things spread on networks: biological contagions on contact networks, memes on social media, or activation patterns in neural networks. I build statistical models that bridge theory and data.
+I study how information and dynamics flow through networks. My research sits at the junction of Network Science, Bayesian Inference, and Machine Learning.
 
-I am interested in deep connections among **network dynamics, learning & inference theory, and statistical physics**. By understanding how these fields relate and exploiting connections between them, I hope to develop not only better tools but a better understanding of complex systems in general. 
+I am primarily interested in inverse problems for network dynamics, reconstructing the underlying rules of a system from dynamics on a network. My current work focuses on three key challenges:
+
+- **Graphical Models**: Understanding why algorithms like Belief Propagation fail on loopy graphs and how to "tune" them on loopy graphs.
+
+- **Sampling-Free Inference**: Developing Fourier-space representations for Bayesian Neural Networks to enable exact learning without expensive sampling.
+
+- **Learning Social Dynamics**: Reverse-engineering the rules of social and biological contagions by observing their spread across complex networks.
+
 
