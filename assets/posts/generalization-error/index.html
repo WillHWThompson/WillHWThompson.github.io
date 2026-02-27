@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Will Thompson">
+<meta name="dcterms.date" content="2024-12-02">
+
+<title>Generalization Error via the Replica Method: Learning in the Hidden Manifold Model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="final_writeup_files/libs/clipboard/clipboard.min.js"></script>
+<script src="final_writeup_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="final_writeup_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="final_writeup_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="final_writeup_files/libs/quarto-html/popper.min.js"></script>
+<script src="final_writeup_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="final_writeup_files/libs/quarto-html/anchor.min.js"></script>
+<link href="final_writeup_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="final_writeup_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="final_writeup_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="final_writeup_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="final_writeup_files/libs/bootstrap/bootstrap-a74871fe4945b66d259aafc266475145.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script type="module" src="final_writeup_files/libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="final_writeup_files/libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#generalization-error-and-classical-learning-theory" id="toc-generalization-error-and-classical-learning-theory" class="nav-link active" data-scroll-target="#generalization-error-and-classical-learning-theory">Generalization Error and Classical Learning Theory</a>
+  <ul class="collapse">
+  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link" data-scroll-target="#supervised-learning">Supervised Learning</a></li>
+  <li><a href="#training-loss-and-test-loss" id="toc-training-loss-and-test-loss" class="nav-link" data-scroll-target="#training-loss-and-test-loss">Training Loss and Test Loss</a></li>
+  <li><a href="#bias-variance-and-generalization-error" id="toc-bias-variance-and-generalization-error" class="nav-link" data-scroll-target="#bias-variance-and-generalization-error">Bias, Variance, and Generalization Error</a></li>
+  <li><a href="#double-descent-and-overparameterization" id="toc-double-descent-and-overparameterization" class="nav-link" data-scroll-target="#double-descent-and-overparameterization">Double Descent and Overparameterization</a></li>
+  </ul></li>
+  <li><a href="#generative-model" id="toc-generative-model" class="nav-link" data-scroll-target="#generative-model">Generative Model</a></li>
+  <li><a href="#student-model" id="toc-student-model" class="nav-link" data-scroll-target="#student-model">Student Model</a>
+  <ul class="collapse">
+  <li><a href="#plan-of-the-proof" id="toc-plan-of-the-proof" class="nav-link" data-scroll-target="#plan-of-the-proof">Plan of the Proof</a></li>
+  </ul></li>
+  <li><a href="#free-energy-and-statistical-physics" id="toc-free-energy-and-statistical-physics" class="nav-link" data-scroll-target="#free-energy-and-statistical-physics">Free Energy and Statistical Physics</a>
+  <ul class="collapse">
+  <li><a href="#the-replica-trick" id="toc-the-replica-trick" class="nav-link" data-scroll-target="#the-replica-trick">The Replica Trick</a></li>
+  </ul></li>
+  <li><a href="#replicated-gaussian-equivalence" id="toc-replicated-gaussian-equivalence" class="nav-link" data-scroll-target="#replicated-gaussian-equivalence">Replicated Gaussian Equivalence</a>
+  <ul class="collapse">
+  <li><a href="#replica-symmetric-ansatz" id="toc-replica-symmetric-ansatz" class="nav-link" data-scroll-target="#replica-symmetric-ansatz">Replica Symmetric Ansatz</a></li>
+  <li><a href="#generalization-error" id="toc-generalization-error" class="nav-link" data-scroll-target="#generalization-error">Generalization Error</a>
+  <ul class="collapse">
+  <li><a href="#generalization-error-1" id="toc-generalization-error-1" class="nav-link" data-scroll-target="#generalization-error-1">Generalization Error</a></li>
+  <li><a href="#training-error" id="toc-training-error" class="nav-link" data-scroll-target="#training-error">Training Error</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#interactive-results" id="toc-interactive-results" class="nav-link" data-scroll-target="#interactive-results">Interactive Results</a>
+  <ul class="collapse">
+  <li><a href="#key-observations" id="toc-key-observations" class="nav-link" data-scroll-target="#key-observations">Key Observations</a></li>
+  <li><a href="#technical-notes" id="toc-technical-notes" class="nav-link" data-scroll-target="#technical-notes">Technical Notes</a>
+  <ul class="collapse">
+  <li><a href="#parameters-used" id="toc-parameters-used" class="nav-link" data-scroll-target="#parameters-used">Parameters Used</a></li>
+  <li><a href="#double-descent-phenomenon" id="toc-double-descent-phenomenon" class="nav-link" data-scroll-target="#double-descent-phenomenon">Double Descent Phenomenon</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Generalization Error via the Replica Method: Learning in the Hidden Manifold Model</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Will Thompson </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 2, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="generalization-error-and-classical-learning-theory" class="level1">
+<h1>Generalization Error and Classical Learning Theory</h1>
+<section id="supervised-learning" class="level2">
+<h2 class="anchored" data-anchor-id="supervised-learning">Supervised Learning</h2>
+<p>In supervised learning, we are given a dataset <span class="math display">\[ D = \{ (\mathbf{x}^\mu), y^\mu \}_{\mu = 1}^n \]</span> where each <span class="math inline">\(\mathbf{x}^\mu\)</span> is a feature vector and <span class="math inline">\(y^\mu\)</span> is the corresponding label or target value. We assume the data is generated by a true underlying function, called the “teacher” model: <span class="math display">\[ y^\mu = f(\mathbf{x}^\mu) + \epsilon \]</span> where <span class="math inline">\(\epsilon\)</span> is zero-mean noise.</p>
+<p>Our goal is to learn a “student” model <span class="math inline">\(\hat{f}_\mathbf{\theta}(\mathbf{x})\)</span>, parameterized by <span class="math inline">\(\theta\)</span>, that approximates the teacher as closely as possible. To measure performance, we typically minimize the mean squared error (MSE) between predictions and true values.</p>
+</section>
+<section id="training-loss-and-test-loss" class="level2">
+<h2 class="anchored" data-anchor-id="training-loss-and-test-loss">Training Loss and Test Loss</h2>
+<p><strong>Training loss</strong> is the error computed on the data used to fit the model. It measures how well the model fits the training set. <strong>Test loss</strong> (or generalization error) is the error on new, unseen data. A model that fits the training data perfectly may not generalize well to new data (overfitting).</p>
+</section>
+<section id="bias-variance-and-generalization-error" class="level2">
+<h2 class="anchored" data-anchor-id="bias-variance-and-generalization-error">Bias, Variance, and Generalization Error</h2>
+<p>The expected test error can be decomposed into three terms: <span class="math display">\[\mathbb{E}_{\epsilon , D}[(y - \hat{f}(x;D))^2] = (\textrm{Bias}(\hat{f}(x,D)))^2 + \textrm{Var}[\hat{f}(x,D)] + \sigma^2\]</span></p>
+<ul>
+<li><strong>Bias</strong> measures the error due to incorrect model assumptions (e.g., using a linear model for nonlinear data). High bias means the model is too simple and underfits.</li>
+<li><strong>Variance</strong> measures how much the model’s predictions change if we use a different training set. High variance means the model is too sensitive to the training data and overfits.</li>
+<li><strong>Irreducible error (<span class="math inline">\(\sigma^2\)</span>)</strong> is the noise inherent in the data generation process, which cannot be reduced by any model.</li>
+</ul>
+<p>Mathematically, <span class="math display">\[\textrm{Bias}[\hat{f}(x,D)] = \mathbb{E}_D[\hat{f}(x;D) - f(x)]\]</span> <span class="math display">\[\textrm{Var}_D[\hat{f}(x,D)] =  \mathbb{E}_D\left[ (\hat{f}(x;D) - \mathbb{E}_D[\hat{f}(x;D)])^2 \right]\]</span> <span class="math display">\[\sigma^2 = \mathbb{E}_y [ (y - f(x))^2]\]</span></p>
+<p>The <strong>bias-variance tradeoff</strong> describes how increasing model complexity typically decreases bias but increases variance. The optimal model minimizes the sum of bias², variance, and irreducible error, achieving the lowest possible generalization error.</p>
+<div id="fig-bias-variance" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bias-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<img src="figures/bias_variance_tradeoff.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-bias-variance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="double-descent-and-overparameterization" class="level2">
+<h2 class="anchored" data-anchor-id="double-descent-and-overparameterization">Double Descent and Overparameterization</h2>
+<div id="fig-double-descent" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-double-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: flex-start;">
+<img src="figures/double_descent.png" class="img-fluid figure-img">
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-double-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="generative-model" class="level1">
+<h1>Generative Model</h1>
+<p>We are considering a high dimensional regression/classification problem. The problem is specified by a model and a dataset <span class="math inline">\(\mathcal{D}\)</span></p>
+<p>We define the dataset <span class="math display">\[ D = \{ (\mathbf{x}^\mu), y^\mu \}_{\mu = 1}^n \]</span></p>
+<p><span class="math display">\[\begin{equation*}
+  y^\mu = f^0\left(\frac{1}{d} \mathbf{c}^\mu \cdot \mathbf{\theta}^0\right)
+\end{equation*}\]</span></p>
+<p>Where the features <span class="math inline">\(\mathbf{x}^\mu\)</span> are vectors in <span class="math inline">\(\mathbb{R}^p\)</span> and <span class="math inline">\(y^\mu \in \mathbb{R}\)</span> is the corresponding predictor.</p>
+<p>We will adopt a <em>student-teacher</em> framework to understand the learning process. In this frame we specify a generative model known as a <em>teacher</em> which generates a dataset using a predefined stochastic process and a <em>student</em> which attempts to learn a set of parameters to generate this dataset.</p>
+<p>In this case there are several ways to think about the teacher process we are talking about. We will first consider the following. A <span class="math inline">\(d\)</span> dimensional dataset is generated and then is projected into a <span class="math inline">\(p\)</span> dimensional space before a non-linearity. This so-called <em>hidden manifold model</em> mimics a structured dataset where points fit on a low dimensional structure.</p>
+<p>The generative model is specified as follows</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Generative Model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><strong>Generate Latent Vectors</strong>: For each datapoint <span class="math inline">\(\mu\)</span> we draw a latent vector <span class="math inline">\(\mathbf{c}^\mu \sim \mathcal{N}(\mathbf{0}, I_d)\)</span>. This represents the low-dimensional latent structure of the data.</p></li>
+<li><p><strong>Generate Labels</strong>: We select a vector <span class="math inline">\(\mathbf{\theta}^0 \in \mathbb{R}^d\)</span> from some distribution <span class="math inline">\(P_\theta(.)\)</span>. This represents the <em>ground truth direction in our latent space</em>. Labels for our data will be determined based on the similarity to this vector. The labels are generated by taking a dot product between our latent vectors <span class="math inline">\(\mathbf{c}^\mu\)</span> and our ground truth vector <span class="math inline">\(\mathbf{\theta}^0\)</span> and passing the result through a linear or non-linear function <span class="math inline">\(f^0(\cdot)\)</span>. <span class="math display">\[ y^\mu = f^0\left(\frac{1}{d} \mathbf{c}^\mu \cdot \mathbf{\theta}^0\right) \]</span></p></li>
+<li><p><strong>Generate Data Points</strong>: We generate our <span class="math inline">\(p\)</span> dimensional datapoints by applying a random non-linear transformation, where <span class="math inline">\(F \in \mathbb{R}^{\times p}\)</span> is a random matrix which acts as a random linear transformation from a <span class="math inline">\(d\)</span> dimensional latent space to a <span class="math inline">\(p\)</span> dimensional data space. A function (linear or non-linear) <span class="math inline">\(\sigma(\cdot)\)</span> is then applied to each vector—this “hides” the linear structure of our generative process. <strong>Note</strong>: This process can also be viewed as passing the data through a single-layer perceptron with random weights. <span class="math display">\[ \mathbf{x}^\mu = \sigma\left(\frac{1}{\sqrt{d}} F^\top \mathbf{c}^\mu \right) \]</span></p></li>
+</ol>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="98" data-source-offset="-72"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 97;"><span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>d3 <span class="op">=</span> <span class="pp">require</span>(<span class="st">"d3@7"</span>)</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>Plotly <span class="op">=</span> <span class="pp">require</span>(<span class="st">"plotly.js@2.34.0/dist/plotly.min.js"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="104" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 103;"><span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { generativeModelViz } <span class="im">from</span> <span class="st">"./scripts/generative-model-viz.js"</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="co">// Controls</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>viewof sigmaType <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>([<span class="st">"identity"</span><span class="op">,</span> <span class="st">"tanh"</span><span class="op">,</span> <span class="st">"relu"</span><span class="op">,</span> <span class="st">"sign"</span>]<span class="op">,</span> {</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"σ (projection non-linearity)"</span><span class="op">,</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">"identity"</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>viewof f0Type <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>([<span class="st">"identity"</span><span class="op">,</span> <span class="st">"tanh"</span><span class="op">,</span> <span class="st">"sign"</span>]<span class="op">,</span> {</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"f₀ (label function)"</span><span class="op">,</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">"identity"</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>viewof thetaAngle <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">0</span><span class="op">,</span> <span class="dv">2</span><span class="op">*</span><span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span>]<span class="op">,</span> {</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"θ angle (radians)"</span><span class="op">,</span></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span><span class="op">/</span><span class="dv">4</span><span class="op">,</span></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>  <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>viewof rerollTrigger <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">button</span>(<span class="st">"Reroll Random Data"</span>)</span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="fu">generativeModelViz</span>({</span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>  sigmaType<span class="op">,</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>  f0Type<span class="op">,</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>  thetaAngle<span class="op">,</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>  rerollTrigger<span class="op">,</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>  d3<span class="op">,</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>  Plotly</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-6" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="student-model" class="level1">
+<h1>Student Model</h1>
+<p>Given a dataset <span class="math inline">\(\mathcal{D}\)</span>, a student model attempts to minimize a loss function.</p>
+<p>The student model makes predictions <span class="math display">\[ y^\mu = \hat{f}(\mathbf{x}^\mu \cdot \mathbf{\hat{w}}) \]</span></p>
+<p>Where the weights <span class="math inline">\(\mathbf{\hat{w}}\)</span> minimize the following loss function <span class="math display">\[ \mathbf{\hat{w}} = \underset{\mathbf{w}}{\arg\min} \left[ \sum_{\mu = 1}^n \ell(y^\mu, \mathbf{x}^\mu \cdot \mathbf{w}) + \frac{\lambda}{2} ||\mathbf{w}||_2^2 \right] \]</span></p>
+<p>Where <span class="math inline">\(\ell(y^\mu, \hat{y}^\mu)\)</span> is a convex loss function. <strong>Note</strong>: The convexity of the loss function is important because it is required for the replica symmetric solution to hold.</p>
+<p><span class="math display">\[
+\ell(y^\mu, \hat{y}^\mu) =
+\begin{cases}
+(y^\mu - \hat{y}^\mu)^2 &amp; \text{if regression} \\
+\log(1 + e^{-\hat{y}^\mu y^\mu}) &amp; \text{if classification}
+\end{cases}
+\]</span></p>
+<p>We can define two kinds of error <span class="math inline">\(\epsilon_g\)</span>, the generalization error, and the training error <span class="math inline">\(\epsilon_t\)</span>.</p>
+<p>The training error is defined as the empirical risk over our training data <span class="math inline">\(\mathcal{D}\)</span> <span class="math display">\[
+\epsilon_t = \frac{1}{n} \sum_{\mu=1}^n \ell(y^\mu, \hat{y}^\mu) + \frac{\lambda}{2} ||\mathbf{\hat{w}}||_2^2
+\]</span></p>
+<p>While the training loss is bounded from below, the loss is not.</p>
+<p>The generalization error <span class="math inline">\(\epsilon_g\)</span> is defined as the loss on a new dataset generated from a teacher model with the same parameters <span class="math display">\[
+\epsilon_g = \frac{1}{4^k n} \mathbb{E}_{\mathbf{x}^{\textrm{new}}, y^{\textrm{new}}} \left[ \ell(y^{\textrm{new}}, \hat{y}^{\textrm{new}}) \right]
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We want to write the generalization error in a suggestive form. First, we will define <span class="math display">\[ \lambda_\mu = \mathbf{w} \cdot \sigma\left(\frac{1}{d} F^\top \mathbf{c}^\mu \right) \]</span></p>
+<p>We could think about this as the ‘preactivation’ or the linear output of our GLM before the non-linearity is applied.</p>
+<p>Secondly, we define <span class="math display">\[ \nu_\mu = \frac{1}{\sqrt{d}} \mathbf{c}^\mu \cdot \mathbf{\theta}^0 \]</span></p>
+<p>This is the similarity between a given latent vector and the ‘ground truth’ before the non-linearity is applied.</p>
+<p>In terms of these two quantities, we can write <span class="math display">\[ \epsilon_g = \frac{1}{n} \sum_{\mu = 1}^n \left( f^0(\nu_\mu) - \hat{f}(\lambda_\mu) \right)^2 \]</span></p>
+<p>This is going to be important because we will show that in the limit of an infinite number of features, <span class="math inline">\(\nu_\mu\)</span> and <span class="math inline">\(\lambda_\mu\)</span> are going to be distributed according to a Gaussian distribution <span class="math inline">\(\nu_\mu, \lambda_\mu \sim \mathcal{N}(0, \Sigma)\)</span> with zero mean and a covariance matrix <span class="math inline">\(\Sigma\)</span> which can be calculated from thermodynamic potentials.</p>
+<p>This will become important.</p>
+</div>
+</div>
+<section id="plan-of-the-proof" class="level2">
+<h2 class="anchored" data-anchor-id="plan-of-the-proof">Plan of the Proof</h2>
+<ol type="1">
+<li>Define a Gibbs distribution where the energy is the loss of our student model. As the inverse temperature <span class="math inline">\(\beta \to \infty\)</span>, we can analyze the behavior of the optimized model.</li>
+<li>The generalization error can be calculated from the free energy. In order to express the free energy, we will use the <strong>replica trick</strong>.</li>
+<li>Once we write down the partition function for the replicated system <span class="math inline">\(Z_\beta^r\)</span>, we can then invoke <strong>Replicated Generalized Gaussian Equivalence</strong> to show that our system is equivalent to a linear model with data drawn from a Gaussian distribution with a given covariance matrix <span class="math inline">\(\Sigma\)</span>. The elements of this covariance matrix are related to the overlap between replicated systems.</li>
+<li>We use a <strong>replica symmetric</strong> ansatz, which holds for convex loss functions. This reduces the number of parameters our model depends on.</li>
+<li>We can then express the quenched average of our replicated partition function as a saddle point integral of the <strong>replica symmetric potential</strong>.</li>
+<li>By taking the limit of this function as <span class="math inline">\(\beta \to \infty\)</span>, we can express the free energy <strong>replica symmetric potential</strong> in terms of the overlap parameters for the optimized system.</li>
+<li>We derive a set of self-consistent saddle point equations for the values of these optimized overlap parameters. By iterating these equations, we can find the fixed points which correspond to the correct value of the optimized parameters.</li>
+<li>We can then express the generalization error in terms of the optimized overlap values.</li>
+</ol>
+</section>
+</section>
+<section id="free-energy-and-statistical-physics" class="level1">
+<h1>Free Energy and Statistical Physics</h1>
+<p>In order to compute the average generalization error for the ensemble, we will use methods first developed for the statistical physics of disordered systems. The general approach is to define a Gibbs measure over our ensemble where the Hamiltonian is replaced with our loss function. The minimum energy of our system corresponds to the correct optimization of our loss function. By calculating quantities using this ensemble and taking the inverse temperature <span class="math inline">\(\beta \to \infty\)</span>, the system concentrates on the set of weights with the lowest training loss, and we can analyze the behavior of the optimized system.</p>
+<p>Before we continue, it is necessary to explain the connection between statistical learning problems and statistical physics in slightly more detail.</p>
+<p>First, we define a Gibbs measure <span class="math display">\[
+\mu_\beta( \mathbf{w} | \{ \mathbf{x}^\mu, y^\mu \}) = \frac{1}{\mathcal{Z}_\beta} \exp\left( - \beta \left[
+\sum_{\mu=1}^n \ell(y^\mu, \hat{y}^\mu) + \frac{\lambda}{2} ||\mathbf{w}||_2^2 \right] \right)
+\]</span></p>
+<p>In a twist which is either completely trivial or incredibly deep, the Gibbs measure can be rewritten in the form of a Gibbs ensemble. The Gibbs measure exactly corresponds to the posterior in a Bayesian model: <span class="math display">\[
+\underbrace{\mu_\beta( \mathbf{w} | \{ \mathbf{x}^\mu, y^\mu \})}_{\text{Posterior} \quad P(\mathbf{w} | \mathcal{D}) } =
+\underbrace{\prod_{\mu = 1}^n \frac{1}{\mathcal{Z}_\beta} \exp\left( - \beta \sum_{\mu=1}^n \ell(y^\mu, \hat{y}^\mu) \right)}_{\text{Likelihood} \quad P(\mathcal{D} | \mathbf{w}) }
+\underbrace{\prod_{i = 1}^p \exp\left( - \beta \frac{\lambda}{2} ||\mathbf{w}||_2^2 \right)}_{\text{Prior} \quad P(\mathbf{w})}
+\]</span></p>
+<p>So we can then define the free energy density <span class="math display">\[ f_\beta(\mathcal{D}) = -\frac{1}{\beta p} \ln \mathcal{Z}_\beta \]</span></p>
+<p>Suppressing the <span class="math inline">\(\mathcal{D}\)</span> dependence, we can write <span class="math display">\[ \ln \mathcal{Z}_\beta = e^{- p \beta f_\beta} \]</span></p>
+<p>In a standard result from statistical physics, we can show that deviations from the average for the free energy density <span class="math inline">\(f_\beta\)</span> are exponentially rare. The quantity is <em>self-averaging</em>. <span class="math display">\[ P(f) \sim \exp(p \Phi(f)) \]</span></p>
+<p>Where <span class="math inline">\(\Phi(f)\)</span> is a convex function with its minimum <span class="math inline">\(\Phi(f) = 0\)</span> at the mean of <span class="math inline">\(f\)</span>.</p>
+<section id="the-replica-trick" class="level2">
+<h2 class="anchored" data-anchor-id="the-replica-trick">The Replica Trick</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What is the Replica Trick?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The replica trick is an important but seemingly strange method to compute partition functions for disordered systems. We can express the partition function <span class="math inline">\(Z_\beta\)</span>. Then we can rewrite <span class="math inline">\(Z_\beta^n\)</span> by taking the exponential of the log <span class="math display">\[ Z_\beta^n = \exp(n \ln Z_\beta) \]</span></p>
+<p>Notice if we take a derivative <span class="math display">\[ \frac{\partial Z_\beta^n}{\partial n} = \ln Z_\beta \cdot e^{n \ln Z_\beta} = Z_\beta^n \ln Z_\beta \]</span></p>
+<p>We can Taylor expand <span class="math inline">\(Z_\beta^n\)</span> as <span class="math display">\[ Z_\beta^n = 1 + n \ln Z_\beta + \frac{n^2}{2} (\ln Z_\beta)^2 + \dots \]</span></p>
+<p>Plugging this into our derivative, we get <span class="math display">\[ \frac{\partial Z_\beta^n}{\partial n} = \ln Z_\beta \left(1 + n \ln Z_\beta + \frac{n^2}{2} (\ln Z_\beta)^2 + \dots \right) \]</span></p>
+<p>Now if we take the limit <span class="math display">\[ \lim_{n \to 0} \frac{\partial Z_\beta^n}{\partial n} = \lim_{n \to 0} \ln Z_\beta \left(1 + n \ln Z_\beta + \frac{n^2}{2} (\ln Z_\beta)^2 + \dots \right) \]</span></p>
+<p>Taking this limit, terms with <span class="math inline">\(n\)</span> dependence vanish and we get <span class="math display">\[ \lim_{n \to 0} \frac{\partial Z_\beta^n}{\partial n} = \ln Z_\beta \]</span></p>
+</div>
+</div>
+</div>
+<p>Now since <span class="math inline">\(\mathcal{D} = \{ \mathbf{x}^\mu, y^\mu \}\)</span> represent configurations of our system, we can represent our partition function.</p>
+<p>This means that we can write express the partition function which will have <span class="math inline">\(r\)</span> times the energy of our original system <span class="math display">\[ \ln \mathcal{Z}_\beta^r = e^{- p r \beta f_\beta} \]</span></p>
+<p>Now we want to calculate the quenched average of the partition function <span class="math display">\[ \mathbb{E}_{\mathcal{D}} [Z_\beta^{r}] = \int P(f) e^{- p r \beta f} df \]</span></p>
+<p>Substituting our values for <span class="math inline">\(P(f)\)</span> and <span class="math inline">\(\ln \mathcal{Z}_\beta^r\)</span> <span class="math display">\[ \mathbb{E}_{\mathcal{D}} [Z_\beta^{r}] = \int e^{p [\Phi(f) - r \beta f]} df \]</span></p>
+<p>Then we can use the identity we developed for our replica symmetric system to show that (taking the thermodynamic limit and exchanging the order the limits are taken in) <span class="math display">\[ f_\beta = -\frac{1}{p} \ln \mathcal{Z}_\beta = \lim_{r \to 0^+} \frac{d}{dr} \lim_{p \to \infty} \left[ -\frac{1}{p} \mathbb{E}_{\mathcal{D}} [ Z_\beta^r ] \right] \]</span></p>
+<p>Now let’s take seriously the idea of the replicated system. If we have <span class="math inline">\(r\)</span> identical and independent copies of our replicated system indexed by <span class="math inline">\(a\)</span>, then <span class="math display">\[
+\mathbb{E}_{\{ \mathbf{x}^\mu, y^\mu \}} [ Z_\beta^r ] =
+\underbrace{\int d\mathbf{\theta}^0 P_\theta(\mathbf{\theta}^0)}_{\text{(I: $\mathbf{\theta}^0$)}}
+\underbrace{\int \prod_{a=1}^r d\mathbf{w}^a P_w(\mathbf{w}^a)}_{\text{(II: $\mathbf{w}^a$)}}
+\underbrace{\prod_{\mu=1}^n \int dy^\mu}_{\text{(III: $y^\mu$)}}
+\underbrace{\mathbb{E}_{\mathbf{c}^\mu} \left[
+P_y^0 \left( y^\mu \Big| \nu_\mu \right)
+\prod_{a=1}^r P_y \left( y^\mu \Big| \lambda_\mu^a \right)
+\right]}_{\text{(IV: $\hat{y}^\mu$)}}
+\]</span></p>
+<p>Now we can see that our partition function depends on the joint probability <span class="math inline">\(P(\nu_\mu, \lambda_\mu^a)\)</span>.</p>
+</section>
+</section>
+<section id="replicated-gaussian-equivalence" class="level1">
+<h1>Replicated Gaussian Equivalence</h1>
+<p>We can show that <span class="math display">\[ P(\nu_\mu, \lambda_\mu^a) = \mathcal{N}(0, \Sigma) \]</span></p>
+<p>The elements of this matrix are related to the overlap parameters. To understand these, let’s first define <span class="math inline">\(\mathbf{s}^a\)</span> to be the projection of the weights in the <span class="math inline">\(a\)</span>th replica <span class="math inline">\(\mathbf{w}^a\)</span> into the random feature space.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What is <span class="math inline">\(\mathbf{s}^a\)</span>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We define <span class="math inline">\(\mathbf{s}^a\)</span> as follows: <span class="math display">\[ \mathbf{s}^a = \frac{1}{\sqrt{p}} F \mathbf{w}^a \]</span></p>
+<p>Why is this important? If we have no non-linearity <span class="math inline">\(\sigma\)</span>, our data points are generated as <span class="math display">\[ y^\mu = \frac{1}{\sqrt{d}} \mathbf{w}^a \cdot F^\top \mathbf{c}^\mu \]</span></p>
+<p>We can see that <span class="math display">\[ \hat{y}_\mu^a = \mathbf{w}^a \cdot F^\top \mathbf{c}^\mu \propto \mathbf{s}^a \cdot \mathbf{c}^\mu \]</span></p>
+<p>Since the teacher generated data as <span class="math display">\[ y^\mu \propto \mathbf{\theta}^0 \cdot \mathbf{c}^\mu \]</span></p>
+<p><strong><span class="math inline">\(\mathbf{s}^a\)</span> represents our model’s reconstruction of the latent <span class="math inline">\(\mathbf{\theta}^0\)</span>.</strong> The closer <span class="math inline">\(\mathbf{s}^a\)</span> is to <span class="math inline">\(\mathbf{\theta}^0\)</span>, the better our model can generalize.</p>
+</div>
+</div>
+<p>We can define the overlap parameters as</p>
+<p><span class="math inline">\(\rho\)</span> measures the 2-norm or the <em>self-overlap</em> <span class="math inline">\(\mathbf{\theta}^0 \cdot \mathbf{\theta}^0\)</span> of the ground truth vector in latent space. <span class="math display">\[ \rho = \frac{1}{d} || \mathbf{\theta}^0 ||^2 \]</span></p>
+<p>Next, <span class="math inline">\(m_s^a\)</span> represents the similarity between <span class="math inline">\(\mathbf{\theta}^0\)</span> and <span class="math inline">\(\mathbf{s}^a\)</span>; the higher this quantity is, the better the ability of the <span class="math inline">\(a\)</span>th replica to generalize. <span class="math display">\[ m_s^a = \frac{1}{d} \mathbf{s}^a \cdot \mathbf{\theta}^0 \]</span></p>
+<p>Now, <span class="math inline">\(q_s^{ab}\)</span> represents the overlap between the latent representations of two replicas in the random feature space (or student space). <span class="math display">\[ q_s^{ab} = \frac{1}{d} \mathbf{s}^a \cdot \mathbf{s}^b \]</span></p>
+<p>Now, <span class="math inline">\(q_w^{ab}\)</span> represents the overlap between the representations of two replicas in the space of weights. <span class="math display">\[ q_w^{ab} = \frac{1}{d} \mathbf{w}^a \cdot \mathbf{w}^b \]</span></p>
+<p>Now, remember we are leveraging replicated Gaussian equivalence; this lets us replace our non-linear model with a linear model and data drawn from a Gaussian distribution. The above overlaps neglect this non-linearity. We have to compensate for it by scaling our overlap parameters. First, let’s define</p>
+<p><span class="math display">\[ \kappa_0 = \mathbb{E}_z(\sigma(z)) \quad \textrm{and} \quad \kappa_1 = \mathbb{E}_z [ z \sigma(z) ] \quad \textrm{and} \quad \kappa_\star^2 = \mathbb{E}_z [ \sigma(z)^2 ] - \kappa_1^2 - \kappa_0^2 \]</span></p>
+<p>Intuitively, this scaling accounts for the effect of the non-linearity on the output.</p>
+<p>With the <span class="math inline">\(\kappa\)</span> factors, we can finally write <span class="math display">\[ M_a = \kappa_1 m_s^a \quad \text{and} \quad Q^{ab} = \kappa_\star^2 q_w^{ab} + \kappa_1^2 q_s^{ab} \]</span></p>
+<p>With these terms, we can finally write the covariance as <span class="math display">\[
+\Sigma^{ab} = \begin{pmatrix}
+\rho &amp; M_a \\
+M_a &amp; Q^{ab}
+\end{pmatrix}
+\]</span></p>
+<section id="replica-symmetric-ansatz" class="level2">
+<h2 class="anchored" data-anchor-id="replica-symmetric-ansatz">Replica Symmetric Ansatz</h2>
+<p>Next we want to assume that the overlaps for all the replicas have the same value. This is equivalent to assuming that</p>
+<p><span class="math display">\[m_s^a = m_s \quad q_s^{ab} = q_s \quad q_w^{ab} = q_w \quad \forall a\]</span></p>
+<p>We can rewrite the quenched average of our replicated partition function as a saddle point integral with respect to the three replica symmetric overlap parameters</p>
+<p><span class="math display">\[\mathbb{E}[{Z_\beta^r}] \propto \int d q_s dq_w d m_s e^{(p \Phi^{(r)}_\beta(m_s, q_s, q_w))} \]</span></p>
+<p>If we take the limit of <span class="math inline">\(p \to \infty\)</span> and <span class="math inline">\(r \to 0\)</span> this saddle point integral concentrates around <span class="math inline">\(\Phi^0_\beta(m_s,q_s,q_w)\)</span>.</p>
+<p>But we care about the extremum <span class="math display">\[
+f_\beta = - \lim_{r \to 0} \frac{1}{r} \mathbb{E}[{Z_\beta^r}] \propto  - \lim_{r \to 0} \frac{1}{r} \underset{m_s,q_s,q_w}{\textbf{extremum}} \quad \Phi_\beta^{(r)}(m_s,q_s,q_w)
+\]</span></p>
+<p>Now what we care about is the optimal solution to this problem with the minimum loss function. This is the <span class="math inline">\(\beta \to \infty\)</span> limit. We define the overlaps in this limit as <span class="math inline">\(\{ q_w^\star, q_s^\star, m_s^\star \}\)</span></p>
+<p>The free energy for the optimized system</p>
+<p><span class="math display">\[
+f^\star =  \underset{m_s,q_s,q_w}{\textbf{extremum}} \quad \Phi_\beta^{(0)}(m^\star_s,q^\star_s,q^\star_w)
+\]</span></p>
+<p>We can then derive a set of self-consistent saddle point equations to find the values of these parameters.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Self Consistent Saddle Point Equations
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The values of these parameters correspond to the solution of the optimisation problem in eq. (1.6), and can be obtained as the fixed point solutions of the following set of self-consistent saddle-point equations:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{aligned}
+\widehat{V}_s &amp;= \frac{\alpha \kappa_1^2}{\gamma V_s^2} \mathbb{E}_\xi
+\left[ \int_{\mathbb{R}} \mathrm{d}y \, \mathcal{Z}(y, \omega_0) \partial_\omega \eta(y, \omega_1) \right], \\
+\widehat{q}_s &amp;= \frac{\alpha \kappa_1^2}{\gamma V_s^2} \mathbb{E}_\xi
+\left[ \int_{\mathbb{R}} \mathrm{d}y \, \mathcal{Z}(y, \omega_0) \left( \eta(y, \omega_1) - \omega_1 \right)^2 \right], \\
+\widehat{m}_s &amp;= \frac{\alpha \kappa_1}{\gamma V_s} \mathbb{E}_\xi
+\left[ \int_{\mathbb{R}} \mathrm{d}y \, \partial_\omega \mathcal{Z}(y, \omega_0) \left( \eta(y, \omega_1) - \omega_1 \right) \right],
+\end{aligned}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\begin{aligned}
+\widehat{V}_w &amp;= \frac{\alpha \kappa_2^2}{V_w^2} \mathbb{E}_\xi
+\left[ \int_{\mathbb{R}} \mathrm{d}y \, \mathcal{Z}(y, \omega_0) \partial_\omega \eta(y, \omega_1) \right], \\
+\widehat{q}_w &amp;= \frac{\alpha \kappa_2^2}{V_w^2} \mathbb{E}_\xi
+\left[ \int_{\mathbb{R}} \mathrm{d}y \, \mathcal{Z}(y, \omega_0) \left( \eta(y, \omega_1) - \omega_1 \right)^2 \right].
+\end{aligned}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\begin{aligned}
+V_s &amp;= \frac{1}{\widehat{V}_s} \left( 1 - z g_\mu(-z) \right), \\
+q_s &amp;= \frac{\widehat{m}_s^2 + \widehat{q}_s}{\widehat{V}_s^2}
+\left[ 1 - 2z g_\mu(-z) + z^2 g_\mu'(-z) \right]
+- \frac{\widehat{q}_w}{\lambda + \widehat{V}_w}
+\left[ -z g_\mu(-z) + z^2 g_\mu'(-z) \right], \\
+m_s &amp;= \frac{\widehat{m}_s}{\widehat{V}_s} \left( 1 - z g_\mu(-z) \right).
+\end{aligned}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\begin{aligned}
+V_w &amp;= \frac{\gamma}{\lambda + \widehat{V}_w}
+\left[ \frac{1}{\gamma} - 1 + z g_\mu(-z) \right], \\
+q_w &amp;= \gamma \frac{\widehat{q}_w}{\left( \lambda + \widehat{V}_w \right)^2}
+\left[ \frac{1}{\gamma} - 1 + z^2 g_\mu'(-z) \right] \\
+&amp;\quad + \frac{\widehat{m}_s^2 + \widehat{q}_s}{\left( \lambda + \widehat{V}_w \right) V_s}
+\left[ -z g_\mu(-z) + z^2 g_\mu'(-z) \right].
+\end{aligned}
+\end{equation}\]</span></p>
+<p>written in terms of the following auxiliary variables <span class="math inline">\(\xi \sim \mathcal{N}(0,1)\)</span>, <span class="math inline">\(z = \frac{\lambda + \widehat{V}_w}{V_s}\)</span>, and functions:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{aligned}
+\eta(y, \omega) &amp;= \arg\min_{x \in \mathbb{R}}
+\left[ \frac{(x - \omega)^2}{2V} + \ell(y, x) \right], \\
+\mathcal{Z}(y, \omega) &amp;= \int_{\mathbb{R}} \frac{\mathrm{d}x}{\sqrt{2 \pi V^0}}
+e^{-\frac{1}{2V^0} (x - \omega)^2} \delta \left( y - f^0(x) \right),
+\end{aligned}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(V = \kappa_1^2 V_s + \kappa_2^2 V_w\)</span>, <span class="math inline">\(V^0 = \rho - \frac{M^2}{Q}\)</span>, <span class="math inline">\(Q = \kappa_1^2 q_s + \kappa_2^2 q_w\)</span>, <span class="math inline">\(M = \kappa_1 m_s\)</span>, <span class="math inline">\(\omega_0 = M / \sqrt{Q}\)</span>, and <span class="math inline">\(\omega_1 = \sqrt{Q} \xi\)</span>.</p>
+</div>
+</div>
+</div>
+<p>The above block shows the self consistent equtions which are quite cumbersome. Notice that there are the equations only depend on a handful of parameters. <span class="math inline">\(\lambda\)</span>, the lagrange multiplier for the ridge regression, <span class="math inline">\(\alpha = \frac{n}{p}\)</span> the number of datpoints per dimension, <span class="math inline">\(\gamma = \frac{p}{d}\)</span> the ratio between the latent and observed dimensions. It also depends on <span class="math inline">\(g_\mu(z)\)</span> which is the Stieltjes transform of the spectral density <span class="math inline">\(\mu\)</span> for out random feature matrix <span class="math inline">\(FF^T\)</span>. This is important because it the generalization error only depends on the spectral properties of the random matrix. In the case of an <span class="math inline">\(F\)</span> with iid gaussian elements, the spectral density follows a Marchenko-Pastur distribution and its Stijles transform has the followingg form</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Spectral Norms and Stijlez Transforms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<section id="spectral-norm-stieltjes-transform" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="spectral-norm-stieltjes-transform">Spectral Norm, Stieltjes Transform</h2>
+<p>The <strong>spectral norm</strong> of a matrix ( A ^{n n} ), denoted ( |A| ), is the largest singular value of the matrix, which corresponds to the largest eigenvalue of ( A ) (in absolute value) if ( A ) is symmetric. Mathematically: <span class="math display">\[
+\|A\| = \max_{\|x\| = 1} \|Ax\|.
+\]</span> The spectral norm is crucial in analyzing the convergence and stability properties of matrix-based systems.</p>
+<p>The <strong>spectral measure</strong> of a matrix ( A ) is a probability measure that describes the distribution of its eigenvalues. Formally, for a symmetric matrix ( A ), the spectral measure is: <span class="math display">\[
+\mu_A(\lambda) = \frac{1}{n} \sum_{i=1}^n \delta(\lambda - \lambda_i),
+\]</span> where ( {<em>i}</em>{i=1}^n ) are the eigenvalues of ( A ) and ( ) is the Dirac delta function.</p>
+<p>This measure provides a compact description of the spectrum and is widely used in the study of random matrices and high-dimensional statistical physics.</p>
+<section id="stieltjes-transform" class="level3">
+<h3 class="anchored" data-anchor-id="stieltjes-transform">Stieltjes Transform</h3>
+<p>The <strong>Stieltjes transform</strong> is a powerful tool to analyze the spectral measure of matrices. Given a probability measure ( ) (e.g., the spectral measure of a matrix ( A )), the Stieltjes transform is defined as: <span class="math display">\[
+g_\mu(z) = \int_{\mathbb{R}} \frac{\mu(\lambda)}{\lambda - z} \, d\lambda, \quad z \in \mathbb{C} \setminus \mathbb{R}.
+\]</span> This function is analytic in the complex plane outside the real axis and encodes the distribution of eigenvalues. Key properties include: - ( g_(z) ) provides information about the density of eigenvalues near a given point in the spectrum. - In the limit ( z ), the Stieltjes transform relates to the first moment of the measure: <span class="math display">\[
+  \lim_{z \to \infty} z g_\mu(z) = 1.
+  \]</span></p>
+</section>
+<section id="marchenko-pastur-distribution-and-its-stieltjes-transform" class="level3">
+<h3 class="anchored" data-anchor-id="marchenko-pastur-distribution-and-its-stieltjes-transform">Marchenko-Pastur Distribution and Its Stieltjes Transform</h3>
+<p>The <strong>Marchenko-Pastur distribution</strong> is a probability distribution that describes the limiting spectral measure of sample covariance matrices in the high-dimensional limit. Specifically, for a covariance matrix ( X^X ), where ( X ^{n d} ) has independent, identically distributed entries with zero mean and unit variance, the eigenvalue density ( <em>() ) is: <span class="math display">\[
+\rho_\text{MP}(\lambda) = \frac{1}{2\pi \lambda} \sqrt{(\lambda_+ - \lambda)(\lambda - \lambda_-)}, \quad \lambda \in [\lambda_-, \lambda_+],
+\]</span> where ( </em>= (1 )^2 ) and ( c = ) is the aspect ratio.</p>
+<p>The Stieltjes transform of the Marchenko-Pastur distribution is: <span class="math display">\[
+g_\text{MP}(z) = \frac{1 - c - z + \sqrt{(z - \lambda_-)(z - \lambda_+)}}{2cz}, \quad z \in \mathbb{C} \setminus [\lambda_-, \lambda_+].
+\]</span> Here, the square root is taken with a branch cut along ( [<em>-, </em>+] ).</p>
+</section>
+</section>
+</div>
+</div>
+</section>
+<section id="generalization-error" class="level2">
+<h2 class="anchored" data-anchor-id="generalization-error">Generalization Error</h2>
+<p>Finally the error can be expressed in terms of the optimum overlaps.</p>
+<p>For the generalization error <span class="math inline">\(\epsilon_g\)</span> we have</p>
+<section id="generalization-error-1" class="level3">
+<h3 class="anchored" data-anchor-id="generalization-error-1">Generalization Error</h3>
+<p><span class="math display">\[\epsilon_g = \rho + Q^\star - 2M^\star\]</span></p>
+<p>for regression and</p>
+<p><span class="math display">\[\epsilon_g = \frac{1}{\pi} \cos^{-1}(\frac{M^\star}{\sqrt{Q^\star}})\]</span></p>
+<p>for classification.</p>
+<p>In the case of regression the loss increases with the norm of our weights and decreases as the alignment between <span class="math inline">\(\mathbf{s}\)</span> and <span class="math inline">\(\theta^0\)</span>. In the case of classification it depends only on the actual angle between these two vectors.</p>
+</section>
+<section id="training-error" class="level3">
+<h3 class="anchored" data-anchor-id="training-error">Training Error</h3>
+<p>The training error <span class="math inline">\(\epsilon_t\)</span> is a more complicated form <span class="math display">\[
+\lim_{n \to \infty} \epsilon_t \to \frac{\lambda}{2\alpha} q_w^\star + \mathbb{E}_{\xi, y} \left[ \mathcal{Z}(y, \omega_0^\star) \ell \left( y, \eta(y, \omega_1^\star) \right) \right]
+\]</span></p>
+<p>where as before $ (0, 1)$,</p>
+<p><span class="math inline">\(y\sim\text{Uni}(\mathbb{R})\)</span>, and <span class="math inline">\(\mathcal{Z},\eta\)</span> are the same as in the block above, evaluated at the solution of the above saddle-point equations: <span class="math display">\[
+\omega_0^\star = M^\star / \sqrt{Q^\star} \quad \text{and} \quad \omega_1^\star = \sqrt{Q^\star} \xi.
+\]</span></p>
+</section>
+</section>
+</section>
+<section id="interactive-results" class="level1">
+<h1>Interactive Results</h1>
+<p>This section presents interactive visualizations of the generalization error analysis from our corrected implementation of the fixed point equations D.22-D.25.</p>
+<p>The interactive plots allow you to: - <strong>Adjust regularization λ</strong>: See how regularization affects the double descent phenomenon - <strong>Select nonlinearity</strong>: Compare different activation functions (sign, erf) - <strong>Choose task type</strong>: Switch between classification and regression - <strong>Control noise level</strong>: For regression tasks, adjust the noise parameter Δ</p>
+<section id="key-observations" class="level2">
+<h2 class="anchored" data-anchor-id="key-observations">Key Observations</h2>
+<ul>
+<li><strong>Double Descent Spike</strong>: For low regularization (λ ≤ 0.01), observe the characteristic spike in generalization error at p/n ≈ 1</li>
+<li><strong>Regularization Effect</strong>: Higher λ values smooth out the spike and reduce overall error</li>
+<li><strong>Nonlinearity Impact</strong>: Different activation functions show varying sensitivity to the interpolation threshold</li>
+<li><strong>3D Surface</strong>: The surface plot reveals the complex relationship between sample ratio (n/d), feature ratio (p/n), and generalization performance</li>
+</ul>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="538" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 537;"><span id="cb3-538"><a href="#cb3-538" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { createInteractivePlots } <span class="im">from</span> <span class="st">"./scripts/interactive-plots.js"</span></span>
+<span id="cb3-539"><a href="#cb3-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-540"><a href="#cb3-540" aria-hidden="true" tabindex="-1"></a><span class="co">// Returning a DOM node causes OJS to render it inline</span></span>
+<span id="cb3-541"><a href="#cb3-541" aria-hidden="true" tabindex="-1"></a><span class="fu">createInteractivePlots</span>({ d3<span class="op">,</span> Plotly })</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="technical-notes" class="level2">
+<h2 class="anchored" data-anchor-id="technical-notes">Technical Notes</h2>
+<p>The visualizations are based on our <strong>corrected implementation</strong> of the replica method equations from the Gerace et al.&nbsp;(2021) paper. Key corrections made:</p>
+<ol type="1">
+<li><strong>Fixed classification formulas</strong>: Removed erroneous √2 factor in equations D.26</li>
+<li><strong>Corrected sign error</strong>: Fixed the sign in the q_w equation D.23<br>
+</li>
+<li><strong>Proper theoretical foundation</strong>: Implemented the systematic iterative approach from D.22-D.25</li>
+</ol>
+<section id="parameters-used" class="level3">
+<h3 class="anchored" data-anchor-id="parameters-used">Parameters Used</h3>
+<ul>
+<li><strong>Sign nonlinearity</strong>: κ₁ = √(2/π) ≈ 0.798, κ* = √(1-2/π) ≈ 0.602</li>
+<li><strong>Erf nonlinearity</strong>: κ₁ = 2/√(3π) ≈ 0.650, κ* ≈ 0.200<br>
+</li>
+<li><strong>Regularization range</strong>: λ ∈ [10⁻⁴, 1.0]</li>
+<li><strong>Noise levels</strong>: Δ ∈ [0.0, 1.0] for regression</li>
+</ul>
+</section>
+<section id="double-descent-phenomenon" class="level3">
+<h3 class="anchored" data-anchor-id="double-descent-phenomenon">Double Descent Phenomenon</h3>
+<p>The interactive plots clearly demonstrate the <strong>double descent</strong> behavior predicted by the theory:</p>
+<ol type="1">
+<li><strong>Classical regime</strong> (p/n &lt; 1): Error decreases as model complexity increases</li>
+<li><strong>Interpolation threshold</strong> (p/n ≈ 1): Sharp spike in generalization error for low λ</li>
+<li><strong>Overparametrized regime</strong> (p/n &gt; 1): Error decreases again as we add more parameters</li>
+</ol>
+<p>This behavior matches the theoretical predictions in Figures 3 and 6 of the original paper and validates our corrected implementation.</p>
+<hr>
+<p><em>Use the controls above to explore different parameter combinations and observe how they affect the generalization error landscape.</em></p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIFNoYXJlZCBsaWJyYXJ5IGltcG9ydHMgKGF2YWlsYWJsZSB0byBhbGwgT0pTIGNlbGxzIGluIHRoaXMgZG9jdW1lbnQpXG5kMyA9IHJlcXVpcmUoXCJkM0A3XCIpXG5QbG90bHkgPSByZXF1aXJlKFwicGxvdGx5LmpzQDIuMzQuMC9kaXN0L3Bsb3RseS5taW4uanNcIilcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImltcG9ydCB7IGdlbmVyYXRpdmVNb2RlbFZpeiB9IGZyb20gXCIuL3NjcmlwdHMvZ2VuZXJhdGl2ZS1tb2RlbC12aXouanNcIlxuXG4vLyBDb250cm9sc1xudmlld29mIHNpZ21hVHlwZSA9IElucHV0cy5yYWRpbyhbXCJpZGVudGl0eVwiLCBcInRhbmhcIiwgXCJyZWx1XCIsIFwic2lnblwiXSwge1xuICBsYWJlbDogXCLPgyAocHJvamVjdGlvbiBub24tbGluZWFyaXR5KVwiLFxuICB2YWx1ZTogXCJpZGVudGl0eVwiXG59KVxuXG52aWV3b2YgZjBUeXBlID0gSW5wdXRzLnJhZGlvKFtcImlkZW50aXR5XCIsIFwidGFuaFwiLCBcInNpZ25cIl0sIHtcbiAgbGFiZWw6IFwiZuKCgCAobGFiZWwgZnVuY3Rpb24pXCIsXG4gIHZhbHVlOiBcImlkZW50aXR5XCJcbn0pXG5cbnZpZXdvZiB0aGV0YUFuZ2xlID0gSW5wdXRzLnJhbmdlKFswLCAyKk1hdGguUEldLCB7XG4gIGxhYmVsOiBcIs64IGFuZ2xlIChyYWRpYW5zKVwiLFxuICB2YWx1ZTogTWF0aC5QSS80LFxuICBzdGVwOiAwLjFcbn0pXG5cbnZpZXdvZiByZXJvbGxUcmlnZ2VyID0gSW5wdXRzLmJ1dHRvbihcIlJlcm9sbCBSYW5kb20gRGF0YVwiKVxuXG5nZW5lcmF0aXZlTW9kZWxWaXooe1xuICBzaWdtYVR5cGUsXG4gIGYwVHlwZSxcbiAgdGhldGFBbmdsZSxcbiAgcmVyb2xsVHJpZ2dlcixcbiAgZDMsXG4gIFBsb3RseVxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImltcG9ydCB7IGNyZWF0ZUludGVyYWN0aXZlUGxvdHMgfSBmcm9tIFwiLi9zY3JpcHRzL2ludGVyYWN0aXZlLXBsb3RzLmpzXCJcblxuLy8gUmV0dXJuaW5nIGEgRE9NIG5vZGUgY2F1c2VzIE9KUyB0byByZW5kZXIgaXQgaW5saW5lXG5jcmVhdGVJbnRlcmFjdGl2ZVBsb3RzKHsgZDMsIFBsb3RseSB9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdzaWdtYVR5cGUnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnZjBUeXBlJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3RoZXRhQW5nbGUnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgncmVyb2xsVHJpZ2dlcicpIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../..";
+window._ojs.paths.runtimeToRoot = "../../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
