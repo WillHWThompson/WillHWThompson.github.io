@@ -170,6 +170,11 @@ hr {
   border-top: 1px solid #ddd;
   margin: 2.5rem 0;
 }
+
+/* Remove off-white container background from OJS plot cells */
+.cell-output.cell-output-display {
+  background: transparent !important;
+}
 </style>
 </head>
 
@@ -255,50 +260,6 @@ hr {
 <h1>Introduction</h1>
 <p>This writeup is a replication of results from the paper <strong>“Generalisation error in learning with random features and the hidden manifold model”</strong> by Gerace, Loureiro, Krzakala, Mézard, and Zdeborová (ICML 2020 / <em>J. Stat. Mech.</em> 2021) [<a href="https://arxiv.org/abs/2002.09339">arXiv:2002.09339</a>]. It was completed as a final project for the graduate course <em>Information, Physics, and Computation</em> at the University of Vermont.</p>
 <hr>
-</section>
-<section id="motivation" class="level1">
-<h1>Motivation</h1>
-<p>Modern datasets are high-dimensional in the sense that each observation <span class="math inline">\(\mathbf{x}^\mu \in \mathbb{R}^p\)</span> may have thousands or millions of coordinates. Yet the signal that determines the label—the thing a model actually needs to learn—often lives on a much lower-dimensional structure. An image of a face has millions of pixels, but the directions that matter for identity lie on a manifold of far smaller dimension. A single nucleotide polymorphism array has hundreds of thousands of sites, but genetic ancestry is captured by a handful of principal components.</p>
-<p>This observation motivates a basic question: <strong>when can a simple linear model, trained on high-dimensional observations, recover low-dimensional latent structure?</strong> And can we say something <em>exact</em>—not just in order-of-magnitude scaling—about how much data it needs?</p>
-<p>The answer requires taking the high-dimensional limit seriously. Classical finite-<span class="math inline">\(n\)</span> learning theory gives bounds that are rarely tight in practice. What we want instead is the exact asymptotic risk as <span class="math inline">\(n, p, d \to \infty\)</span> with fixed ratios <span class="math inline">\(\alpha = n/p\)</span> and <span class="math inline">\(\gamma = p/d\)</span>. This is the regime where statistical physics tools—replica method, cavity method, Gaussian equivalence—become exact rather than approximate.</p>
-<section id="the-setup-in-brief" class="level2">
-<h2 class="anchored" data-anchor-id="the-setup-in-brief">The Setup in Brief</h2>
-<p>We study a <strong>hidden manifold model</strong>: data lives on a <span class="math inline">\(d\)</span>-dimensional latent space but is observed after a random nonlinear projection into <span class="math inline">\(\mathbb{R}^p\)</span>. A <strong>teacher</strong> generates labels from the latent structure; a <strong>student</strong> tries to learn those labels from the high-dimensional observations alone.</p>
-<p>The key parameters are three ratios:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 32%">
-<col style="width: 36%">
-<col style="width: 32%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Symbol</th>
-<th>Meaning</th>
-<th>Effect</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(\alpha = n/p\)</span></td>
-<td>samples per feature</td>
-<td>controls over/underfitting</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(\gamma = p/d\)</span></td>
-<td>features per latent dim</td>
-<td>controls how much structure is “hidden”</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(\lambda\)</span></td>
-<td>ridge regularization</td>
-<td>smooths the interpolation-threshold spike</td>
-</tr>
-</tbody>
-</table>
-<p>The central result—derived in full below—is that the generalization error depends on <span class="math inline">\((\alpha, \gamma, \lambda)\)</span> only through a handful of scalar <strong>overlap parameters</strong> satisfying self-consistent equations. These can be iterated to a fixed point in milliseconds and predict the test error exactly, including the double-descent spike at <span class="math inline">\(\alpha = 1\)</span>.</p>
-<hr>
-</section>
 </section>
 <section id="generalization-error-and-classical-learning-theory" class="level1">
 <h1>Generalization Error and Classical Learning Theory</h1>
