@@ -1,296 +1,280 @@
-// Helper function for random Gaussian
-function randomGaussian() {
-  let u = 0, v = 0;
-  while (u === 0) u = Math.random();
-  while (v === 0) v = Math.random();
-  return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+// generative-model-viz.js
+//
+// 3D "lift" visualization of the hidden manifold model:
+//   — latent points c^μ sit on a ghost plane at the bottom (z = Z_FLOOR)
+//   — teacher direction θ⁰ is drawn as an arrow on that plane
+//   — projected/observed points x^μ float above in 3D (after σ(Fc))
+//   — thin lift lines connect each latent point to its observed copy
+//   — everything colored by label value with a custom muted-pastel scale
+
+// ── Palette ──────────────────────────────────────────────────────────────────
+
+// Purple-to-teal diverging scale (matches scientific software post palette)
+// negative label → light purple, zero → neutral, positive → teal
+const PASTEL_SCALE = [
+  [0.00, "#e8c8f0"],   // light purple
+  [0.25, "#c49bd4"],   // medium purple
+  [0.50, "#f5f5f5"],   // neutral
+  [0.75, "#a0d4d8"],   // light teal
+  [1.00, "#0CBABA"],   // teal
+];
+
+const THETA_COLOR  = "#861388";   // purple — main accent
+const PLANE_COLOR  = "#e0e0e0";   // clean light gray
+const LIFT_COLOR   = "#aaaaaa";   // neutral gray
+const FONT         = "'Inter', system-ui, sans-serif";
+const BG           = "#ffffff";   // clean white
+const AXIS_COLOR   = "#666666";
+
+// ── Math helpers ──────────────────────────────────────────────────────────────
+
+function rng() {
+  let u, v;
+  do { u = Math.random(); } while (!u);
+  do { v = Math.random(); } while (!v);
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
 }
 
-// Generate random data
-function generateData(nPoints = 50, thetaAngle = Math.PI/4) {
-  // Generate latent points c^μ ~ N(0, I_2)
-  const cPoints = [];
-  for (let i = 0; i < nPoints; i++) {
-    cPoints.push([randomGaussian(), randomGaussian()]);
-  }
-  
-  // Ground truth vector θ on unit circle
+function applyNl(x, type) {
+  if (type === "tanh")  return Math.tanh(x);
+  if (type === "relu")  return Math.max(0, x);
+  if (type === "sign")  return x >= 0 ? 1 : -1;
+  return x;  // identity
+}
+
+// ── Main export ───────────────────────────────────────────────────────────────
+
+export function generativeModelViz({ sigmaType, f0Type, thetaAngle, rerollTrigger, d3, Plotly }) {
+
+  const N = 90;   // number of points — dense enough to read the cloud
+
+  // Ground-truth direction θ (2D unit vector)
   const theta = [Math.cos(thetaAngle), Math.sin(thetaAngle)];
-  
-  // Random projection matrix F (3x2) - projects from 2D to 3D
-  // Increase spread by removing division and multiplying by 2
-  const F = [];
-  for (let i = 0; i < 3; i++) {
-    F[i] = [];
-    for (let j = 0; j < 2; j++) {
-      F[i][j] = randomGaussian() * 2;
-    }
-  }
-  return { cPoints, theta, F };
-}
 
-// Main visualization function
-// Helper to apply nonlinearity
-function applyNonlinearity(x, type) {
-  if (type === "identity") return x;
-  if (type === "tanh") return Math.tanh(x);
-  if (type === "relu") return Math.max(0, x);
-  if (type === "sign") return Math.sign(x);
-  return x;
-}
+  // Random projection matrix F  (2 × 3, each column is a 3D direction)
+  const F = [
+    [rng(), rng(), rng()],
+    [rng(), rng(), rng()],
+  ];
 
-// Compute projections and labels
-function computeProjections(data, f0Type, sigmaType) {
-  const { cPoints, theta, F } = data;
-  return cPoints.map(c => {
-    // Project to 3D: x = sigma(F^T c)
+  // Generate data
+  const pts = Array.from({ length: N }, () => {
+    const c = [rng(), rng()];
+    const nu = (c[0] * theta[0] + c[1] * theta[1]);   // c · θ  (d=2, so no 1/√d needed for vis)
+    const y  = applyNl(nu, f0Type);
+    // x = σ( F^T c )  →  3D vector
     const xRaw = [
-      F[0][0]*c[0] + F[0][1]*c[1],
-      F[1][0]*c[0] + F[1][1]*c[1],
-      F[2][0]*c[0] + F[2][1]*c[1]
+      F[0][0] * c[0] + F[1][0] * c[1],
+      F[0][1] * c[0] + F[1][1] * c[1],
+      F[0][2] * c[0] + F[1][2] * c[1],
     ];
-    const x = xRaw.map(v => applyNonlinearity(v, sigmaType));
-    // Label: y = f0((1/d) c · theta)
-    const d = c.length;
-    const dot = c[0]*theta[0] + c[1]*theta[1];
-    const y = applyNonlinearity(dot/d, f0Type);
+    const x = xRaw.map(v => applyNl(v, sigmaType));
     return { c, x, y };
   });
-}
-// Only one valid generativeModelViz definition, no stray references to height or export
-function generativeModelViz({
-  sigmaType = "identity",
-  f0Type = "identity", 
-  thetaAngle = Math.PI/4,
-  rerollTrigger = 0,
-  d3,
-  Plotly
-}) {
-  
-  // Generate or regenerate data when button is clicked
-  const data = generateData(50, thetaAngle);
-  const projectedData = computeProjections(data, f0Type, sigmaType);
-  const { theta } = data;
-  
-  // Create color scale based on labels
-  const yValues = projectedData.map(d => d.y);
-  const yExtent = d3.extent(yValues);
-  const colorScale = d3.scaleSequential(d3.interpolateViridis)
-    .domain(yExtent);
-  
-  // Calculate the z-range from projected points to place latent points at bottom
-  const zValues = projectedData.map(d => d.x[2]);
-  const zExtent = d3.extent(zValues);
-  const latentZ = zExtent[0] - 1; // Place latent points 1 unit below minimum projected z
-  
-  // Set latent points at the lowest z value shown in the plot
-  const minZ = -4; // Match Plotly z axis minimum
 
-  // Prepare data for Plotly
+  // ── Z floor for latent plane ──────────────────────────────────────────────
+  const allZ = pts.map(p => p.x[2]);
+  const zMin = Math.min(...allZ);
+  const zMax = Math.max(...allZ);
+  const Z_FLOOR = zMin - 1.4;   // a little below the lowest projected point
+
+  // ── Plotly traces ─────────────────────────────────────────────────────────
   const traces = [];
 
+  // 1. Ghost plane (latent space floor) — mesh3d
+  const PS = 3.2;  // half-size
   traces.push({
-    x: projectedData.map(d => d.c[0]),
-    y: projectedData.map(d => d.c[1]),
-    z: projectedData.map(() => minZ),
-    mode: 'markers',
-    type: 'scatter3d',
-    marker: {
-      size: 5,
-      color: projectedData.map(d => d.y),
-      colorscale: 'Cividis', // Sleek colormap
-      colorbar: {
-        title: 'Label',
-        x: 1.18
-      },
-      line: {
-        color: '#222',
-        width: 0.5
-      }
-    },
-    name: 'Latent',
-    text: projectedData.map(d => `Label: ${d.y.toFixed(2)}`),
-    hovertemplate: '%{text}<extra></extra>'
-  });
-  
-  // 2. Ground truth vector θ EXACTLY on x-y plane (z=0)
-  // 2. Ground truth vector θ on latent plane (z=-4)
-  traces.push({
-    x: [0, theta[0] * 2],
-    y: [0, theta[1] * 2],
-    z: [minZ, minZ],
-    mode: 'lines+markers',
-    type: 'scatter3d',
-    line: {
-      color: '#0077b6',
-      width: 2
-    },
-    marker: {
-      size: [3, 8],
-      color: '#0077b6',
-      symbol: ['circle', 'diamond']
-    },
-    name: 'θ',
-    hoverinfo: 'skip'
-  });
-  
-  // 3. Projected points (x^μ) in 3D space
-  traces.push({
-    x: projectedData.map(d => d.x[0]),
-    y: projectedData.map(d => d.x[1]),
-    z: projectedData.map(d => d.x[2]),
-    mode: 'markers',
-    type: 'scatter3d',
-    marker: {
-      size: 5,
-      color: projectedData.map(d => d.y),
-      colorscale: 'Turbo', // Sleek colormap
-      opacity: 0.7,
-      line: {
-        color: '#222',
-        width: 0.5
-      }
-    },
-    name: 'Projected',
-    text: projectedData.map(d => `Label: ${d.y.toFixed(2)}`),
-    hovertemplate: '%{text}<extra></extra>'
-  });
-  
-  // 4. Reference plane at z=0 (latent space) to make it visually clear
-  const planeSize = 4;
-  const planeResolution = 2;
-  const planeX = [];
-  const planeY = [];
-  const planeZ = [];
-  
-  for (let i = 0; i <= planeResolution; i++) {
-    for (let j = 0; j <= planeResolution; j++) {
-      planeX.push(-planeSize + (i * 2 * planeSize) / planeResolution);
-      planeY.push(-planeSize + (j * 2 * planeSize) / planeResolution);  
-      planeZ.push(0); // Always at z=0
-    }
-  }
-  
-  traces.push({
-    x: planeX,
-    y: planeY,
-    z: planeZ,
-    mode: 'markers',
-    type: 'scatter3d',
-    marker: {
-      size: 1.5,
-      color: '#eee',
-      opacity: 0.15
-    },
+    type: "mesh3d",
+    x: [-PS,  PS,  PS, -PS],
+    y: [-PS, -PS,  PS,  PS],
+    z: [Z_FLOOR, Z_FLOOR, Z_FLOOR, Z_FLOOR],
+    i: [0, 0], j: [1, 2], k: [2, 3],
+    color: PLANE_COLOR,
+    opacity: 0.18,
     showlegend: false,
-    hoverinfo: 'skip',
-    name: 'Latent plane'
+    hoverinfo: "skip",
+    flatshading: true,
+    lighting: { diffuse: 0.5, ambient: 1 },
   });
-  
-  // 5. Clear dotted lines connecting each latent point (z=0) to its projected point (3D)
-  projectedData.forEach((d, i) => {
+
+  // 2. Lift lines: latent → projected  (one scatter3d per point, hidden from legend)
+  pts.forEach(p => {
     traces.push({
-      x: [d.x[0], d.c[0]],
-      y: [d.x[1], d.c[1]],
-      z: [d.x[2], minZ],
-      mode: 'lines',
-      type: 'scatter3d',
-      line: {
-        color: '#888',
-        width: 1,
-        dash: 'dot'
-      },
+      type: "scatter3d", mode: "lines",
+      x: [p.c[0], p.x[0]],
+      y: [p.c[1], p.x[1]],
+      z: [Z_FLOOR, p.x[2]],
+      line: { color: LIFT_COLOR, width: 1 },
+      opacity: 0.35,
       showlegend: false,
-      hoverinfo: 'skip',
-      opacity: 0.3
+      hoverinfo: "skip",
     });
   });
-  
-  // Layout configuration
-  const layout = {
-    title: {
-      text: 'Generative Model Visualization',
-      font: { size: 15, color: '#222' }
+
+  // 3. Latent points on the floor plane — colored by label
+  traces.push({
+    type: "scatter3d", mode: "markers",
+    x: pts.map(p => p.c[0]),
+    y: pts.map(p => p.c[1]),
+    z: pts.map(() => Z_FLOOR),
+    marker: {
+      size: 4.5,
+      color: pts.map(p => p.y),
+      colorscale: PASTEL_SCALE,
+      line: { color: "white", width: 0.5 },
+      opacity: 1,
     },
-    scene: {
-      xaxis: { 
-        title: 'Latent Dim 1',
-        range: [-4, 4],
-        showgrid: false,
-        zeroline: false,
-        color: '#222',
-        backgroundcolor: '#fff'
-      },
-      yaxis: { 
-        title: 'Latent Dim 2',
-        range: [-4, 4],
-        showgrid: false,
-        zeroline: false,
-        color: '#222',
-        backgroundcolor: '#fff'
-      },
-      zaxis: { 
-        title: 'Projected Dim',
-        range: [-4, 4],
-        showgrid: false,
-        zeroline: false,
-        color: '#222',
-        backgroundcolor: '#fff'
-      },
-      camera: {
-        eye: { x: 1.8, y: 1.8, z: 1.5 }
-      },
-      aspectmode: 'cube',
-      bgcolor: '#fff'
-    },
-    width: 800,
-    height: 600,
-    margin: { l: 0, r: 0, t: 40, b: 0 },
-    legend: {
-      x: 0.85,
-      y: 0.95,
-      bgcolor: '#fff',
-      bordercolor: '#eee',
-      borderwidth: 1,
-      font: { size: 12, color: '#222' }
-    },
-    hovermode: false // Remove abscissa/crosshair hover lines
-  };
-  
-  // Create container
-  const container = d3.create("div")
-    .style("width", "800px")
-    .style("height", "600px")
-    .style("background", "#fff");
-  
-  // Plot with Plotly
-  Plotly.newPlot(container.node(), traces, layout, {
-    responsive: true,
-    displayModeBar: true
+    name: "c^μ  — latent vectors (ℝᵈ)",
+    hovertemplate: "c^μ<br>label = %{marker.color:.2f}<extra></extra>",
   });
-  
-  // Add info panel
-  // Minimal info panel
-  const infoPanel = d3.create("div")
-    .style("margin-top", "8px")
-    .style("padding", "6px")
-    .style("background", "#fff")
-    .style("border-radius", "3px")
-    .style("font-size", "13px")
-    .style("color", "#222");
 
-  infoPanel.append("div")
-    .style("font-weight", "bold")
-    .text("Parameters:");
+  // 4. Teacher direction θ⁰ — arrow on the latent plane
+  const ARROW_LEN = 1.8;
+  traces.push({
+    type: "scatter3d", mode: "lines+markers",
+    x: [0, theta[0] * ARROW_LEN],
+    y: [0, theta[1] * ARROW_LEN],
+    z: [Z_FLOOR, Z_FLOOR],
+    line: { color: THETA_COLOR, width: 4 },
+    marker: {
+      size: [0, 9],
+      color: THETA_COLOR,
+      symbol: ["circle", "diamond"],
+    },
+    name: "θ⁰  (teacher direction)",
+    hoverinfo: "skip",
+  });
 
-  infoPanel.append("div")
-    .text(`f₀: ${f0Type}, σ: ${sigmaType}, θ: ${(thetaAngle * 180 / Math.PI).toFixed(1)}°`);
+  // 4b. θ⁰ text label at arrowhead — placed as a text trace so it scales with the scene
+  traces.push({
+    type: "scatter3d", mode: "text",
+    x: [theta[0] * ARROW_LEN * 1.28],
+    y: [theta[1] * ARROW_LEN * 1.28],
+    z: [Z_FLOOR],
+    text: ["θ⁰"],
+    textfont: { size: 13, color: THETA_COLOR, family: FONT },
+    textposition: "middle center",
+    showlegend: false,
+    hoverinfo: "skip",
+  });
 
-  // Combine plot and info
-  const fullContainer = d3.create("div");
-  fullContainer.node().appendChild(container.node());
-  fullContainer.node().appendChild(infoPanel.node());
+  // 5. Projected / observed points in 3D — same colorscale, slightly transparent
+  traces.push({
+    type: "scatter3d", mode: "markers",
+    x: pts.map(p => p.x[0]),
+    y: pts.map(p => p.x[1]),
+    z: pts.map(p => p.x[2]),
+    marker: {
+      size: 5.5,
+      color: pts.map(p => p.y),
+      colorscale: PASTEL_SCALE,
+      cmin: Math.min(...pts.map(p => p.y)),
+      cmax: Math.max(...pts.map(p => p.y)),
+      colorbar: {
+        title: { text: "label", font: { size: 11, family: FONT, color: AXIS_COLOR } },
+        tickfont: { size: 10, family: FONT, color: AXIS_COLOR },
+        thickness: 10,
+        len: 0.65,
+        x: 1.01,
+        outlinewidth: 0,
+      },
+      line: { color: "white", width: 0.6 },
+      opacity: 0.88,
+    },
+    name: "x^μ = σ(Fc^μ)  — observed (ℝᵖ)",
+    hovertemplate: "x^μ<br>label = %{marker.color:.2f}<extra></extra>",
+  });
 
-  return fullContainer.node();
+  // ── Layout ────────────────────────────────────────────────────────────────
+  const axisStyle = (title) => ({
+    title: { text: title, font: { size: 11, color: AXIS_COLOR, family: FONT } },
+    tickfont: { size: 9, color: AXIS_COLOR, family: FONT },
+    showgrid: false,
+    showline: false,
+    zeroline: false,
+    showticklabels: false,   // coordinates are arbitrary — hide for clarity
+    backgroundcolor: BG,
+    gridcolor: "#ddd",
+  });
+
+  const layout = {
+    paper_bgcolor: BG,
+    font: { family: FONT },
+    margin: { l: 0, r: 60, t: 16, b: 0 },
+    scene: {
+      xaxis: axisStyle("x₁"),
+      yaxis: axisStyle("x₂"),
+      zaxis: axisStyle("x₃"),
+      bgcolor: BG,
+      camera: { eye: { x: 1.6, y: -1.8, z: 1.2 } },
+      aspectmode: "cube",
+      annotations: [
+        // ── Latent plane label (back-left corner of the ghost plane) ──────
+        {
+          x: -PS * 0.72, y: PS * 0.72, z: Z_FLOOR,
+          text: "Latent space ℝ<sup>d</sup>",
+          showarrow: false,
+          font: { size: 11, color: AXIS_COLOR, family: FONT },
+          bgcolor: "rgba(255,255,255,0.92)",
+          bordercolor: PLANE_COLOR,
+          borderwidth: 1,
+          borderpad: 4,
+          xanchor: "center",
+        },
+        // ── Observed cloud label (above the cloud centroid) ───────────────
+        {
+          x: 0, y: 0, z: zMax + 0.9,
+          text: "Observed space ℝ<sup>p</sup>",
+          showarrow: false,
+          font: { size: 11, color: AXIS_COLOR, family: FONT },
+          bgcolor: "rgba(255,255,255,0.92)",
+          bordercolor: "#ddd",
+          borderwidth: 1,
+          borderpad: 4,
+          xanchor: "center",
+        },
+        // ── Lift-line label (labels the σ(Fc) mapping) ────────────────────
+        {
+          // position near the midpoint between one latent & observed point
+          x: pts[0].c[0] * 0.5 + pts[0].x[0] * 0.5,
+          y: pts[0].c[1] * 0.5 + pts[0].x[1] * 0.5,
+          z: Z_FLOOR + (pts[0].x[2] - Z_FLOOR) * 0.5,
+          text: "σ(Fc)",
+          showarrow: true,
+          ax: 30, ay: -20,
+          font: { size: 10, color: LIFT_COLOR, family: FONT },
+          bgcolor: "rgba(0,0,0,0)",
+          borderwidth: 0,
+          arrowcolor: LIFT_COLOR,
+          arrowsize: 0.8,
+          arrowwidth: 1,
+        },
+      ],
+    },
+    legend: {
+      x: 0.02, y: 0.98,
+      bgcolor: "rgba(255,255,255,0.90)",
+      bordercolor: "#ddd", borderwidth: 1,
+      font: { size: 11, family: FONT, color: "#555" },
+    },
+    hovermode: "closest",
+  };
+
+  const config = {
+    responsive: true,
+    displayModeBar: false,   // no toolbar
+    scrollZoom: false,
+  };
+
+  // ── DOM assembly ──────────────────────────────────────────────────────────
+  const wrap = d3.create("div")
+    .style("width", "100%")
+    .style("height", "560px")
+    .style("border-radius", "8px")
+    .style("overflow", "hidden")
+    .style("background", BG);
+
+  Plotly.newPlot(wrap.node(), traces, layout, config);
+
+  return wrap.node();
 }
-// End of generativeModelViz function

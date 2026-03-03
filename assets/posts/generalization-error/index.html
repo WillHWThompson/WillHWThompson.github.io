@@ -105,6 +105,72 @@ window.Quarto = {
 };
 </script>
 
+<script>
+// When embedded in an iframe, hide the title block and sidebar
+if (window.self !== window.top) {
+  document.documentElement.classList.add('embedded');
+  var base = document.createElement('base');
+  base.target = '_blank';
+  document.head.appendChild(base);
+}
+</script>
+<style>
+html.embedded #title-block-header,
+html.embedded #quarto-margin-sidebar {
+  display: none !important;
+}
+html.embedded .content {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+html.embedded body {
+  margin: 0 !important;
+  padding: 0.5rem 1rem !important;
+}
+html.embedded #quarto-content {
+  padding-top: 0 !important;
+}
+</style>
+<style>
+/* === Match Scientific Software Post Typography & Color === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* H1 = top-level sections in embedded view — purple bottom border */
+.content h1 {
+  margin-top: 2.5rem;
+  border-bottom: 2px solid #861388;
+  padding-bottom: 0.3rem;
+}
+
+html.embedded .content h1:first-of-type {
+  margin-top: 0.5rem;
+}
+
+/* H2 = subsections — teal color */
+.content h2.anchored {
+  color: #2F6690;
+}
+
+/* Override callout-note from Bootstrap blue to purple */
+.callout.callout-note {
+  border-left-color: #861388 !important;
+  background-color: rgba(134, 19, 136, 0.06) !important;
+}
+.callout.callout-note > .callout-header {
+  background-color: rgba(134, 19, 136, 0.08) !important;
+}
+
+/* HR dividers */
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 2.5rem 0;
+}
+</style>
 </head>
 
 <body class="quarto-light">
@@ -115,7 +181,12 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#generalization-error-and-classical-learning-theory" id="toc-generalization-error-and-classical-learning-theory" class="nav-link active" data-scroll-target="#generalization-error-and-classical-learning-theory">Generalization Error and Classical Learning Theory</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a>
+  <ul class="collapse">
+  <li><a href="#the-setup-in-brief" id="toc-the-setup-in-brief" class="nav-link" data-scroll-target="#the-setup-in-brief">The Setup in Brief</a></li>
+  </ul></li>
+  <li><a href="#generalization-error-and-classical-learning-theory" id="toc-generalization-error-and-classical-learning-theory" class="nav-link" data-scroll-target="#generalization-error-and-classical-learning-theory">Generalization Error and Classical Learning Theory</a>
   <ul class="collapse">
   <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link" data-scroll-target="#supervised-learning">Supervised Learning</a></li>
   <li><a href="#training-loss-and-test-loss" id="toc-training-loss-and-test-loss" class="nav-link" data-scroll-target="#training-loss-and-test-loss">Training Loss and Test Loss</a></li>
@@ -143,11 +214,6 @@ window.Quarto = {
   <li><a href="#interactive-results" id="toc-interactive-results" class="nav-link" data-scroll-target="#interactive-results">Interactive Results</a>
   <ul class="collapse">
   <li><a href="#key-observations" id="toc-key-observations" class="nav-link" data-scroll-target="#key-observations">Key Observations</a></li>
-  <li><a href="#technical-notes" id="toc-technical-notes" class="nav-link" data-scroll-target="#technical-notes">Technical Notes</a>
-  <ul class="collapse">
-  <li><a href="#parameters-used" id="toc-parameters-used" class="nav-link" data-scroll-target="#parameters-used">Parameters Used</a></li>
-  <li><a href="#double-descent-phenomenon" id="toc-double-descent-phenomenon" class="nav-link" data-scroll-target="#double-descent-phenomenon">Double Descent Phenomenon</a></li>
-  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -185,6 +251,58 @@ window.Quarto = {
 </header>
 
 
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>This writeup is a replication of results from the paper <strong>“Generalisation error in learning with random features and the hidden manifold model”</strong> by Gerace, Loureiro, Krzakala, Mézard, and Zdeborová (ICML 2020 / <em>J. Stat. Mech.</em> 2021) [<a href="https://arxiv.org/abs/2002.09339">arXiv:2002.09339</a>]. It was completed as a final project for the graduate course <em>Information, Physics, and Computation</em> at the University of Vermont.</p>
+<p>The paper attacks a fundamental question in high-dimensional learning theory: <strong>given data that lives on a low-dimensional latent manifold but is observed through a random nonlinear projection, how well can a regularized linear model generalize?</strong> The answer is delivered as an exact asymptotic formula, valid in the proportional limit <span class="math inline">\(n, p, d \to \infty\)</span> with fixed ratios, derived entirely from the replica method of statistical physics.</p>
+<p>What makes the result striking is that it is <em>exact</em> rather than a bound. Classical PAC-learning arguments produce generalization bounds that are often loose by orders of magnitude at the sample sizes real experiments use. The replica method, by contrast, gives a precise prediction—confirmed by numerical simulations—of the test error as a function of the model-complexity ratios <span class="math inline">\(\alpha = n/p\)</span>, <span class="math inline">\(\gamma = p/d\)</span>, and the regularization strength <span class="math inline">\(\lambda\)</span>. The prediction captures both the classical bias-variance tradeoff and the double-descent peak at the interpolation threshold <span class="math inline">\(p \approx n\)</span>.</p>
+<p>The replication here follows the main derivation of the paper, implementing the saddle-point equations for the ridge-regression student and verifying the predicted generalization error curves against Monte Carlo experiments. The interactive figures below are intended to build intuition for the hidden manifold model before the derivation begins.</p>
+<hr>
+</section>
+<section id="motivation" class="level1">
+<h1>Motivation</h1>
+<p>Modern datasets are high-dimensional in the sense that each observation <span class="math inline">\(\mathbf{x}^\mu \in \mathbb{R}^p\)</span> may have thousands or millions of coordinates. Yet the signal that determines the label—the thing a model actually needs to learn—often lives on a much lower-dimensional structure. An image of a face has millions of pixels, but the directions that matter for identity lie on a manifold of far smaller dimension. A single nucleotide polymorphism array has hundreds of thousands of sites, but genetic ancestry is captured by a handful of principal components.</p>
+<p>This observation motivates a basic question: <strong>when can a simple linear model, trained on high-dimensional observations, recover low-dimensional latent structure?</strong> And can we say something <em>exact</em>—not just in order-of-magnitude scaling—about how much data it needs?</p>
+<p>The answer requires taking the high-dimensional limit seriously. Classical finite-<span class="math inline">\(n\)</span> learning theory gives bounds that are rarely tight in practice. What we want instead is the exact asymptotic risk as <span class="math inline">\(n, p, d \to \infty\)</span> with fixed ratios <span class="math inline">\(\alpha = n/p\)</span> and <span class="math inline">\(\gamma = p/d\)</span>. This is the regime where statistical physics tools—replica method, cavity method, Gaussian equivalence—become exact rather than approximate.</p>
+<section id="the-setup-in-brief" class="level2">
+<h2 class="anchored" data-anchor-id="the-setup-in-brief">The Setup in Brief</h2>
+<p>We study a <strong>hidden manifold model</strong>: data lives on a <span class="math inline">\(d\)</span>-dimensional latent space but is observed after a random nonlinear projection into <span class="math inline">\(\mathbb{R}^p\)</span>. A <strong>teacher</strong> generates labels from the latent structure; a <strong>student</strong> tries to learn those labels from the high-dimensional observations alone.</p>
+<p>The key parameters are three ratios:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 36%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\alpha = n/p\)</span></td>
+<td>samples per feature</td>
+<td>controls over/underfitting</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\gamma = p/d\)</span></td>
+<td>features per latent dim</td>
+<td>controls how much structure is “hidden”</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\lambda\)</span></td>
+<td>ridge regularization</td>
+<td>smooths the interpolation-threshold spike</td>
+</tr>
+</tbody>
+</table>
+<p>The central result—derived in full below—is that the generalization error depends on <span class="math inline">\((\alpha, \gamma, \lambda)\)</span> only through a handful of scalar <strong>overlap parameters</strong> satisfying self-consistent equations. These can be iterated to a fixed point in milliseconds and predict the test error exactly, including the double-descent spike at <span class="math inline">\(\alpha = 1\)</span>.</p>
+<hr>
+</section>
+</section>
 <section id="generalization-error-and-classical-learning-theory" class="level1">
 <h1>Generalization Error and Classical Learning Theory</h1>
 <section id="supervised-learning" class="level2">
@@ -223,6 +341,9 @@ Figure&nbsp;1
 </section>
 <section id="double-descent-and-overparameterization" class="level2">
 <h2 class="anchored" data-anchor-id="double-descent-and-overparameterization">Double Descent and Overparameterization</h2>
+<p>The classical bias-variance picture says test error should be U-shaped: too few parameters and you underfit; too many and you overfit. The sweet spot lies somewhere in between.</p>
+<p>This picture quietly assumes you can never interpolate the training data—that you stop adding parameters before the model can memorize every label. Relax that assumption and something unexpected happens. Near the <strong>interpolation threshold</strong> <span class="math inline">\(p \approx n\)</span>, the model can just barely fit the training set, and the minimum-norm solution has large, poorly-conditioned weights that amplify noise in unseen directions. Test error spikes. But push past this threshold into the overparameterized regime, <span class="math inline">\(p \gg n\)</span>, and something saves you: the minimum-norm interpolating solution—the one gradient descent finds—is implicitly regularized. With more parameters than constraints, the weights spread over many directions, the norm shrinks, and generalization recovers.</p>
+<p>In the replica calculation this shows up concretely. The overlap <span class="math inline">\(q_w^\star\)</span> (tracking weight norm) diverges as <span class="math inline">\(p/n \to 1^-\)</span> for <span class="math inline">\(\lambda \to 0\)</span>—the saddle point becomes singular. On the other side of the threshold <span class="math inline">\(q_w^\star\)</span> is finite and falls with increasing <span class="math inline">\(p/n\)</span>. The double descent curve is not a curious empirical anomaly; it is a phase transition in the free energy of the learning problem.</p>
 <div id="fig-double-descent" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-double-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -270,8 +391,8 @@ Figure&nbsp;2
 <div class="cell">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="98" data-source-offset="-72"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 97;"><span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>d3 <span class="op">=</span> <span class="pp">require</span>(<span class="st">"d3@7"</span>)</span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>Plotly <span class="op">=</span> <span class="pp">require</span>(<span class="st">"plotly.js@2.34.0/dist/plotly.min.js"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="140" data-source-offset="-72"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 139;"><span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>d3 <span class="op">=</span> <span class="pp">require</span>(<span class="st">"d3@7"</span>)</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>Plotly <span class="op">=</span> <span class="pp">require</span>(<span class="st">"plotly.js@2.34.0/dist/plotly.min.js"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -291,35 +412,35 @@ Figure&nbsp;2
 <div class="cell">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="104" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 103;"><span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { generativeModelViz } <span class="im">from</span> <span class="st">"./scripts/generative-model-viz.js"</span></span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="co">// Controls</span></span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>viewof sigmaType <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>([<span class="st">"identity"</span><span class="op">,</span> <span class="st">"tanh"</span><span class="op">,</span> <span class="st">"relu"</span><span class="op">,</span> <span class="st">"sign"</span>]<span class="op">,</span> {</span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"σ (projection non-linearity)"</span><span class="op">,</span></span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">"identity"</span></span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>viewof f0Type <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>([<span class="st">"identity"</span><span class="op">,</span> <span class="st">"tanh"</span><span class="op">,</span> <span class="st">"sign"</span>]<span class="op">,</span> {</span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"f₀ (label function)"</span><span class="op">,</span></span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">"identity"</span></span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>viewof thetaAngle <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">0</span><span class="op">,</span> <span class="dv">2</span><span class="op">*</span><span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span>]<span class="op">,</span> {</span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"θ angle (radians)"</span><span class="op">,</span></span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span><span class="op">/</span><span class="dv">4</span><span class="op">,</span></span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>  <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span></span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>viewof rerollTrigger <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">button</span>(<span class="st">"Reroll Random Data"</span>)</span>
-<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="fu">generativeModelViz</span>({</span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>  sigmaType<span class="op">,</span></span>
-<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>  f0Type<span class="op">,</span></span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>  thetaAngle<span class="op">,</span></span>
-<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>  rerollTrigger<span class="op">,</span></span>
-<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>  d3<span class="op">,</span></span>
-<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>  Plotly</span>
-<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="146" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 145;"><span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { generativeModelViz } <span class="im">from</span> <span class="st">"./scripts/generative-model-viz.js"</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="co">// Controls</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>viewof sigmaType <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>([<span class="st">"identity"</span><span class="op">,</span> <span class="st">"tanh"</span><span class="op">,</span> <span class="st">"relu"</span><span class="op">,</span> <span class="st">"sign"</span>]<span class="op">,</span> {</span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"σ (projection non-linearity)"</span><span class="op">,</span></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">"identity"</span></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>viewof f0Type <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">radio</span>([<span class="st">"identity"</span><span class="op">,</span> <span class="st">"tanh"</span><span class="op">,</span> <span class="st">"sign"</span>]<span class="op">,</span> {</span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"f₀ (label function)"</span><span class="op">,</span></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">"identity"</span></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>viewof thetaAngle <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">0</span><span class="op">,</span> <span class="dv">2</span><span class="op">*</span><span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span>]<span class="op">,</span> {</span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"θ angle (radians)"</span><span class="op">,</span></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="cn">PI</span><span class="op">/</span><span class="dv">4</span><span class="op">,</span></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>  <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span></span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>viewof rerollTrigger <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">button</span>(<span class="st">"Reroll Random Data"</span>)</span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a><span class="fu">generativeModelViz</span>({</span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>  sigmaType<span class="op">,</span></span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>  f0Type<span class="op">,</span></span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>  thetaAngle<span class="op">,</span></span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>  rerollTrigger<span class="op">,</span></span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a>  d3<span class="op">,</span></span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>  Plotly</span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -479,6 +600,7 @@ P_y^0 \left( y^\mu \Big| \nu_\mu \right)
 </section>
 <section id="replicated-gaussian-equivalence" class="level1">
 <h1>Replicated Gaussian Equivalence</h1>
+<p>The key technical engine that makes the replica calculation tractable is the <strong>Gaussian Equivalence Theorem (GET)</strong>, established rigorously for this class of models by Goldt, Loureiro, Reeves, Krzakala, Mézard, and Zdeborová [<a href="https://arxiv.org/abs/2006.14709">arXiv:2006.14709</a>]. The theorem states that, in the high-dimensional limit, the statistics of the nonlinear random features <span class="math inline">\(\sigma(F^\top \mathbf{c}/\sqrt{d})\)</span> are equivalent to those of a Gaussian vector with a particular covariance structure. This reduces the problem to a tractable Gaussian integral, at the cost of introducing the Hermite coefficients <span class="math inline">\(\kappa_0, \kappa_1, \kappa_\star\)</span> that encode the nonlinearity.</p>
 <p>We can show that <span class="math display">\[ P(\nu_\mu, \lambda_\mu^a) = \mathcal{N}(0, \Sigma) \]</span></p>
 <p>The elements of this matrix are related to the overlap parameters. To understand these, let’s first define <span class="math inline">\(\mathbf{s}^a\)</span> to be the projection of the weights in the <span class="math inline">\(a\)</span>th replica <span class="math inline">\(\mathbf{w}^a\)</span> into the random feature space.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -674,10 +796,10 @@ g_\text{MP}(z) = \frac{1 - c - z + \sqrt{(z - \lambda_-)(z - \lambda_+)}}{2cz}, 
 <div class="cell">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="538" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 537;"><span id="cb3-538"><a href="#cb3-538" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { createInteractivePlots } <span class="im">from</span> <span class="st">"./scripts/interactive-plots.js"</span></span>
-<span id="cb3-539"><a href="#cb3-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-540"><a href="#cb3-540" aria-hidden="true" tabindex="-1"></a><span class="co">// Returning a DOM node causes OJS to render it inline</span></span>
-<span id="cb3-541"><a href="#cb3-541" aria-hidden="true" tabindex="-1"></a><span class="fu">createInteractivePlots</span>({ d3<span class="op">,</span> Plotly })</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="582" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 581;"><span id="cb3-582"><a href="#cb3-582" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { createInteractivePlots } <span class="im">from</span> <span class="st">"./scripts/interactive-plots.js"</span></span>
+<span id="cb3-583"><a href="#cb3-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-584"><a href="#cb3-584" aria-hidden="true" tabindex="-1"></a><span class="co">// Returning a DOM node causes OJS to render it inline</span></span>
+<span id="cb3-585"><a href="#cb3-585" aria-hidden="true" tabindex="-1"></a><span class="fu">createInteractivePlots</span>({ d3<span class="op">,</span> Plotly })</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -694,38 +816,6 @@ g_\text{MP}(z) = \frac{1 - c - z + \sqrt{(z - \lambda_-)(z - \lambda_+)}}{2cz}, 
 </div>
 </div>
 </div>
-</section>
-<section id="technical-notes" class="level2">
-<h2 class="anchored" data-anchor-id="technical-notes">Technical Notes</h2>
-<p>The visualizations are based on our <strong>corrected implementation</strong> of the replica method equations from the Gerace et al.&nbsp;(2021) paper. Key corrections made:</p>
-<ol type="1">
-<li><strong>Fixed classification formulas</strong>: Removed erroneous √2 factor in equations D.26</li>
-<li><strong>Corrected sign error</strong>: Fixed the sign in the q_w equation D.23<br>
-</li>
-<li><strong>Proper theoretical foundation</strong>: Implemented the systematic iterative approach from D.22-D.25</li>
-</ol>
-<section id="parameters-used" class="level3">
-<h3 class="anchored" data-anchor-id="parameters-used">Parameters Used</h3>
-<ul>
-<li><strong>Sign nonlinearity</strong>: κ₁ = √(2/π) ≈ 0.798, κ* = √(1-2/π) ≈ 0.602</li>
-<li><strong>Erf nonlinearity</strong>: κ₁ = 2/√(3π) ≈ 0.650, κ* ≈ 0.200<br>
-</li>
-<li><strong>Regularization range</strong>: λ ∈ [10⁻⁴, 1.0]</li>
-<li><strong>Noise levels</strong>: Δ ∈ [0.0, 1.0] for regression</li>
-</ul>
-</section>
-<section id="double-descent-phenomenon" class="level3">
-<h3 class="anchored" data-anchor-id="double-descent-phenomenon">Double Descent Phenomenon</h3>
-<p>The interactive plots clearly demonstrate the <strong>double descent</strong> behavior predicted by the theory:</p>
-<ol type="1">
-<li><strong>Classical regime</strong> (p/n &lt; 1): Error decreases as model complexity increases</li>
-<li><strong>Interpolation threshold</strong> (p/n ≈ 1): Sharp spike in generalization error for low λ</li>
-<li><strong>Overparametrized regime</strong> (p/n &gt; 1): Error decreases again as we add more parameters</li>
-</ol>
-<p>This behavior matches the theoretical predictions in Figures 3 and 6 of the original paper and validates our corrected implementation.</p>
-<hr>
-<p><em>Use the controls above to explore different parameter combinations and observe how they affect the generalization error landscape.</em></p>
-</section>
 </section>
 </section>
 
