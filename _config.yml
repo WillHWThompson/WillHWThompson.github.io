@@ -222,7 +222,10 @@ defaults:
 # -----------------------------------------------------------------------------
 
 jekyll-minifier:
-  exclude: ['robots.txt']
+  # 'assets/posts/*' skips Quarto-generated post bundles: their JS uses modern
+  # ES2019+ syntax (optional catch binding, optional chaining) that uglifier
+  # 4.x can't parse, which otherwise aborts the production build.
+  exclude: ['robots.txt', 'assets/posts/*']
   uglifier_args:
     harmony: true
 
