@@ -5,7 +5,7 @@
       {% if content.items %}
         <ul class="subitems">
           {% for subitem in content.items %}
-            <li><span class="subitem">{{ subitem }}</span></li>
+            <li><div class="subitem">{{ subitem | markdownify }}</div></li>
           {% endfor %}
         </ul>
       {% endif %}

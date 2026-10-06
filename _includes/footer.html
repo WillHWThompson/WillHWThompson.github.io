@@ -1,25 +1,6 @@
-    {% if site.footer_fixed %}
-    <footer class="fixed-bottom">
-      <div class="container mt-0">
-        &copy; Copyright {{ site.time | date: '%Y' }} {{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}. {{ site.footer_text }}
-        {%- if site.impressum_path -%}
-        <a href="{{ site.url }}{{ site.baseurl }}{{ site.impressum_path }}">Impressum</a>.
-        {%- endif -%}
-        {%- if site.last_updated -%}
-        Last updated: {{ "now" | date: '%B %d, %Y' }}.
-        {%- endif %}
-      </div>
-    </footer>
-    {%- else -%}
-    <footer class="sticky-bottom mt-5">
-      <div class="container">
-        &copy; Copyright {{ site.time | date: '%Y' }} {{ site.first_name }} {{ site.middle_name }} {{ site.last_name }}. {{ site.footer_text }}
-        {%- if site.impressum_path -%}
-        <a href="{{ site.url }}{{ site.baseurl }}{{ site.impressum_path }}">Impressum</a>.
-        {%- endif -%}
-        {%- if site.last_updated -%}
-        Last updated: {{ "now" | date: '%B %d, %Y' }}.
-        {%- endif %}
-      </div>
-    </footer>
-    {%- endif %}
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span>&copy; {{ site.time | date: '%Y' }} Will Thompson</span>
+    <span><a href="{{ '/feed.xml' | relative_url }}">rss</a> <span aria-hidden="true">·</span> <a href="https://github.com/{{ site.github_username }}">github</a> <span aria-hidden="true">·</span> <a href="https://bsky.app/profile/{{ site.bluesky_username }}">bluesky</a></span>
+  </div>
+</footer>

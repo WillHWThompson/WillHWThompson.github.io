@@ -1,0 +1,116 @@
+/* Simple type and spacing across the existing Jekyll pages. */
+:root, html[data-theme='dark'] {
+  --global-bg-color: #fff;
+  --global-card-bg-color: #fff;
+  --global-code-bg-color: #f7f7f7;
+  --global-text-color: #000;
+  --global-text-color-light: #000;
+  --global-theme-color: #0645ad;
+  --global-hover-color: #003080;
+  --global-divider-color: #ddd;
+  --global-footer-bg-color: #fff;
+  --global-footer-text-color: #000;
+  --global-footer-link-color: #0645ad;
+  --bs-body-color: #000;
+  --bs-secondary-color: #000;
+  --bs-tertiary-color: #000;
+  color-scheme: light;
+}
+
+body, body.sticky-bottom-footer {
+  min-height: 100vh;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #000;
+  font: 16px/1.6 Arial, Helvetica, sans-serif;
+}
+body > .container {
+  width: 100%;
+  max-width: 790px;
+  flex: 1;
+  margin-top: 0 !important;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  letter-spacing: normal;
+}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.1rem; }
+a, table.table a, .post-list li a, .post-list li a.post-title {
+  color: var(--global-theme-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+a:hover, table.table a:hover { color: var(--global-hover-color); }
+a:focus-visible, .announcements-scroll:focus-visible {
+  outline: 2px solid var(--global-theme-color);
+  outline-offset: 2px;
+}
+
+.site-header, .site-footer { border-bottom: 1px solid var(--global-divider-color); }
+.site-header-inner, .site-footer-inner { max-width: 790px; padding: 0 15px; margin: auto; }
+.site-header-inner { padding-top: 1.5rem; padding-bottom: 1rem; }
+.site-name, .site-name:hover {
+  display: inline-block;
+  margin: 0 0 .7rem;
+  color: var(--global-text-color);
+  font-size: 1.65rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.site-nav { display: flex; flex-wrap: wrap; gap: .2rem 1.3rem; font: inherit; }
+.site-nav a { color: var(--global-theme-color); text-decoration: underline; padding: 0; }
+.site-nav a[aria-current='page'] { color: var(--global-text-color); text-decoration: none; }
+.site-footer { border-top: 1px solid var(--global-divider-color); border-bottom: 0; color: var(--global-text-color-light); font-size: .85rem; }
+.site-footer-inner { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1rem; padding-bottom: 1rem; }
+.site-footer a { color: var(--global-theme-color); }
+.text-muted, .text-secondary, .text-black-50 { color: #000 !important; }
+
+.home-page { max-width: 760px; }
+.home-portrait { float: right; width: 150px; height: 150px; object-fit: cover; margin: .25rem 0 1rem 1.5rem; }
+.home-main h2:first-child { margin-top: 0; }
+.home-page h2 { margin-top: 2rem; margin-bottom: .8rem; }
+.home-page ul { padding-left: 1.4rem; }
+.home-page li { margin-bottom: .5rem; }
+.announcements { clear: both; margin-top: 2rem; }
+.announcements h2 { margin-bottom: .75rem; }
+.announcements-scroll { max-height: 220px; overflow-y: auto; border: 1px solid var(--global-divider-color); padding: 0 1rem; }
+.announcement { padding: .7rem 0; border-bottom: 1px solid var(--global-divider-color); }
+.announcement:last-child { border-bottom: 0; }
+.announcement time { display: block; color: var(--global-text-color-light); font-size: .85rem; }
+.announcement p { margin: 0; }
+.contact-block { margin-top: 2rem; }
+
+.post { max-width: 760px; }
+.post-header { margin-bottom: 1.5rem; }
+.post-header .post-title, .header-bar h1 { color: var(--global-text-color); font-size: 2rem; font-weight: 600; }
+.header-bar { text-align: left; padding: 0 0 1rem; }
+.header-bar p, .post-meta, .post-description { color: var(--global-text-color-light); }
+.post-list li { padding: 1rem 0; }
+.post-list li h3 { font-size: 1.15rem; }
+.publications h2.year { color: var(--global-text-color); text-align: left; margin-bottom: 1rem; font-size: 1.1rem; }
+.publications ol.bibliography li { border-bottom: 1px solid var(--global-divider-color); padding-bottom: 1rem; }
+.publications ol.bibliography li .row > .preview { display: block; }
+.publications ol.bibliography li .row > .preview img { width: 100%; height: auto; border-radius: 0 !important; box-shadow: none !important; }
+.publications ol.bibliography li .row > [id] { flex: 1; max-width: none; }
+.publications ol.bibliography li .abbr abbr { background: none; padding: 0; color: var(--global-text-color-light); }
+.publications ol.bibliography li .abbr abbr a { color: var(--global-text-color-light); }
+.publications ol.bibliography li .links a.btn { border: 0; box-shadow: none; padding: 0 .7rem 0 0; color: var(--global-theme-color); text-decoration: underline; text-transform: none; }
+.cv .card { border: 0; border-bottom: 1px solid var(--global-divider-color); border-radius: 0; padding: 0 0 1.2rem !important; }
+.cv .card .list-group-item { padding-left: 0; padding-right: 0; }
+.cv .list-group-item p, .cv td p, .cv .items p, .cv .subitems p { margin: 0; }
+.cv .badge { background: none !important; color: var(--global-text-color-light) !important; box-shadow: none; text-align: left; white-space: normal; }
+.cv .text-uppercase { text-transform: none !important; }
+.card, .btn { box-shadow: none !important; }
+
+@media (max-width: 580px) {
+  .home-portrait { width: 110px; height: 110px; }
+  .site-footer-inner { flex-direction: column; gap: .2rem; }
+}

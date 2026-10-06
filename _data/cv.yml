@@ -6,11 +6,11 @@
     - name: Full Name
       value: William H. W. Thompson
     - name: Email
-      value: wthomps3@uvm.edu
+      value: "[wthomps3@uvm.edu](mailto:wthomps3@uvm.edu)"
     - name: Website
-      value: https://www.willhwthompson.com
+      value: "[willhwthompson.com](https://www.willhwthompson.com)"
     - name: GitHub
-      value: https://github.com/WillHWThompson
+      value: "[WillHWThompson](https://github.com/WillHWThompson)"
 
 - title: Education
   type: time_table
@@ -25,6 +25,13 @@
 - title: Experience
   type: time_table
   contents:
+    - title: Data Science for Social Good Summer Fellow
+      institution: Johns Hopkins University
+      location: Baltimore, MD
+      year: Summer 2026
+      description:
+        - Worked with the City of Baton Rouge on early warning models for blight and structural deterioration risk for city revitalization.
+        - Selected from more than 400 applicants.
     - title: Graduate Research Assistant
       institution: University of Vermont
       location: Burlington, VT
@@ -38,6 +45,7 @@
       location: Los Alamos, NM
       year: Jun 2025 – Oct 2025
       description:
+        - Worked with Andrey Lokhov on inference in graphical models.
         - Developed BPTuning, a high-performance Julia framework for graphical model inference on loopy graphs.
         - Derived a proof of optimality for a method that optimizes effective parameters to cancel out Belief Propagation (BP) approximation errors on cyclic topologies.
         - Implemented a reconstruction-based objective function to serve as a tractable proxy for exact likelihood maximization.
@@ -82,9 +90,11 @@
 - title: Grants & Awards
   type: list
   contents:
+    - "Data Science for Social Good Summer Fellowship, Johns Hopkins University (2026) — $14,000 award; selected from more than 400 applicants. Worked with the City of Baton Rouge on early warning models for blight and structural deterioration."
+    - "Complexity Award Grant, Vermont Complex Systems Institute, University of Vermont (2026) — $5,000 for modeling strategic lying in Kenyan pastoralists with Eleonora Zanetti (PhD candidate, Washington State University). Supported survey participant compensation and in-country travel for her June–July 2026 fieldwork in Kenya."
     - "Second Place, University of Vermont Computing Student Research Day (2023) — Presented research on developing learnable asynchronous models of opinion dynamics."
     - "Third Place, University of Vermont Computing Science Research Day (2022) — Awarded for research employing evolutionary algorithms to develop robust facility placements."
-    - "MITRE Best Paper Incentive Prize (2022) — Paper 'The Structure and Dynamics of US Common Law' recognized as best out of hundreds published that year."
+    - "MITRE Best Paper Incentive Prize (2022) — For 'The Structure and Dynamics of Modern United States Federal Case Law.'"
     - "Large Team Distinguished Performance Award, LANL (2022) — Recognized for construction and dark matter search leadership with Coherent Captain Mills Detector."
     - "Science Undergraduate Laboratory Internship (SULI) Grant, DOE (2020) — Selective DOE grant for post-baccalaureate research at LANL."
     - "Dean's Award for College Service, St. John's College (2020) — Recognized for exceptional leadership and dedication."
@@ -94,20 +104,28 @@
 - title: Publications (Preprints)
   type: list
   contents:
-    - M. C. Boudreau, W. H. W. Thompson, C. M. Danforth, J.-G. Young, L. Hébert-Dufresne. "[Sensitivity analysis of epidemic forecasting and spreading on networks with probability generating functions](https://arxiv.org/abs/2506.24103)." arXiv:2506.24103 (2025).
+    - A. Chawla, W. H. W. Thompson, J.-G. Young. "[Multiple latent orderings better predict language model preferences](https://arxiv.org/abs/2609.22170)." arXiv:2609.22170 (2026).
+    - K. Tang, D. Kaiser, W. Thompson, J.-G. Young, L. Hébert-Dufresne, N. W. Landry. "[Emergent contagion complexity: Disentangling mechanistic complexity from correlated heterogeneity](https://arxiv.org/abs/2607.25139)." arXiv:2607.25139 (2026).
+    - L. Hébert-Dufresne, A. Allard, J.-G. Young, W. H. W. Thompson, G. St-Onge. "[Simpson's paradox explains the ubiquity of nonlinear, threshold, and complex contagions](https://arxiv.org/abs/2605.00791)." arXiv:2605.00791 (2026).
     - W. H. W. Thompson, Z. Wojtowicz, S. DeDeo. "[Levy Flights of the Collective Imagination](https://arxiv.org/abs/1812.04013)." arXiv:1812.04013 (2018).
 
 - title: Publications (Peer-Reviewed Journals)
   type: list
   contents:
-    - A. A. Aguilar-Arevalo *et al.* "First Event-by-Event Identification of Cherenkov Radiation from Sub-Mev Particles in Liquid Argon." *Phys. Rev. Lett.* **135** (17) 171804 (2025).
-    - A. A. Aguilar-Arevalo *et al.* "Measurement of the liquid argon scintillation pulse shape using differentiable simulation in the coherent CAPTAIN-Mills experiment." *Phys. Rev. D* **112** (7) 072010 (2025).
+    - M. C. Boudreau, W. H. W. Thompson, C. M. Danforth, J.-G. Young, L. Hébert-Dufresne. "[Sensitivity analysis of epidemic forecasting and spreading on networks with probability generating functions](https://doi.org/10.1098/rsif.2025.0686)." *Journal of the Royal Society Interface* **23** (235) 20250686 (2026).
     - N. W. Landry, W. H. W. Thompson, L. Hébert-Dufresne, J.-G. Young. "[Reconstructing networks from simple and complex contagions](https://doi.org/10.1103/PhysRevE.110.L042301)." *Phys. Rev. E* **110** (4) L042301 (2024).
+    - K. Adusumilli *et al.* "[The Structure and Dynamics of Modern United States Federal Case Law](https://doi.org/10.3389/fphy.2021.695219)." *Frontiers in Physics* **9** (Jan 2022).
+
+- title: Coherent CAPTAIN-Mills Collaboration
+  type: list
+  contents:
+    - A. A. Aguilar-Arevalo *et al.* "[Axion-Like Particle Search with a Hybrid Cherenkov-Scintillation Detector](https://arxiv.org/abs/2608.12616)." arXiv:2608.12616 (2026).
+    - A. A. Aguilar-Arevalo *et al.* "[First Event-by-Event Identification of Cherenkov Radiation from Sub-MeV Particles in Liquid Argon](https://doi.org/10.1103/bklh-w3dn)." *Phys. Rev. Lett.* **135** (17) 171804 (2025).
+    - A. A. Aguilar-Arevalo *et al.* "[Measurement of the liquid argon scintillation pulse shape using differentiable simulation in the coherent CAPTAIN-Mills experiment](https://doi.org/10.1103/34mf-z6l9)." *Phys. Rev. D* **112** (7) 072010 (2025).
     - A. A. Aguilar-Arevalo *et al.* "[Testing meson portal dark sector solutions to the MiniBooNE anomaly at the Coherent CAPTAIN-Mills experiment](https://doi.org/10.1103/PhysRevD.109.095017)." *Phys. Rev. D* **109** (9) 095017 (2024).
-    - A. A. Aguilar-Arevalo *et al.* "[Axion-Like Particles at Coherent CAPTAIN-Mills](https://doi.org/10.1103/PhysRevD.107.095036)." *Phys. Rev. D* **107** 095036 (2023).
+    - A. A. Aguilar-Arevalo *et al.* "[Prospects for detecting axionlike particles at the Coherent CAPTAIN-Mills experiment](https://doi.org/10.1103/PhysRevD.107.095036)." *Phys. Rev. D* **107** 095036 (2023).
     - A. A. Aguilar-Arevalo *et al.* "[First Leptophobic Dark Matter Search from Coherent CAPTAIN-Mills](https://doi.org/10.1103/PhysRevLett.129.021801)." *Phys. Rev. Lett.* **129** 021801 (2022).
     - A. A. Aguilar-Arevalo *et al.* "[First dark matter search results from Coherent CAPTAIN-Mills](https://doi.org/10.1103/PhysRevD.106.012001)." *Phys. Rev. D* **106** 012001 (2022).
-    - M. Koehler *et al.* "The structure and dynamics of US common law." *Front. Phys.* (Jan 2022).
 
 - title: Conference Proceedings
   type: list
@@ -150,6 +168,9 @@
         - "Searching for Light Dark Matter with Coherent Captain Mills — University of New Mexico NUPAC Colloquia Series, Albuquerque, NM (May 2021)"
     - title: Conference Presentations
       items:
+        - "The Parliament of Thoughts in Language Models — parallel talk with Aviral Chawla and Jean-Gabriel Young, IC2S2 2026, Burlington, VT (Jul 2026)"
+        - "Multiple latent preference orderings in language models — scheduled oral presentation, contributed session, Conference on Complex Systems (CCS) 2026"
+        - "[Inferring Interaction Kernels In Stochastic Opinion Dynamics Models](https://meetings.ams.org/math/spring2026e/meetingapp.cgi/Paper/60611) — AMS Spring Eastern Sectional Meeting, Boston, MA (Mar 28, 2026; special session on Mathematical Modeling of Ecological and Evolutionary Dynamics)"
         - "Sensitivity of epidemic forecasts with statistical condition estimation — Dynamics Days 2025, Denver, CO (Poster)"
         - "Inferring Interaction Kernels In Stochastic Opinion Dynamics Models — NetSci 2024, Québec City (Jun 2024)"
         - "Understanding Polarization In the Higher Order Non-Linear Voter Model — Dynamics Days 2024, Davis, CA (Jan 2024)"

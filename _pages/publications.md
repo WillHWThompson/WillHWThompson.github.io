@@ -1,9 +1,9 @@
 ---
 layout: page
 permalink: /publications/
-title: publications
-description: publications by categories in reversed chronological order.
-years: [2025,2024,2023,2022,2018]
+title: Publications
+description: Research papers and preprints.
+years: [2026,2025,2024,2023,2022,2018]
 nav: true
 nav_order: 1
 ---
@@ -15,4 +15,10 @@ nav_order: 1
   {% bibliography -f papers3 -q @*[year={{y}}]* %}
 {% endfor %}
 
+</div>
+
+<div class="publications">
+  <h2 id="ccm">Coherent CAPTAIN-Mills collaboration</h2>
+  <p>Papers from the CCM experiment at Los Alamos National Laboratory.</p>
+  {% bibliography -f ccm %}
 </div>

@@ -3,8 +3,7 @@ layout: post-fullwidth
 title: "Scientific Workflows on the Eve of the Butlerian Jihad"
 date: 2026-02-28 09:00:00
 description: >
-  A practical manifesto for scientific software in the era of vibecoding:
-  let's write beautiful code while we still can.
+  Notes on the tools I use to keep research code reproducible and manageable.
 tags: scientific-computing reproducibility workflow python
 categories: research
 ---

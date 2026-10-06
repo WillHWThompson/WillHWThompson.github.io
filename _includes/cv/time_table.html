@@ -24,11 +24,11 @@
                       <span class="item-title">{{ item.title }}</span>
                       <ul class="subitems">
                       {% for subitem in item.contents %}
-                        <li><span class="subitem">{{ subitem }}</span></li>
+                        <li><div class="subitem">{{ subitem | markdownify }}</div></li>
                       {% endfor %}
                       </ul>
                     {% else %}
-                      <span class="item">{{ item }}</span>
+                      <div class="item">{{ item | markdownify }}</div>
                     {% endif %}
                   </li>
                 {% endfor %}
@@ -42,11 +42,11 @@
                       <span class="item-title">{{ item.title }}</span>
                       <ul class="subitems">
                       {% for subitem in item.contents %}
-                        <li><span class="subitem">{{ subitem }}</span></li>
+                        <li><div class="subitem">{{ subitem | markdownify }}</div></li>
                       {% endfor %}
                       </ul>
                     {% else %}
-                      <span class="item">{{ item }}</span>
+                      <div class="item">{{ item | markdownify }}</div>
                     {% endif %}
                   </li>
                 {% endfor %}

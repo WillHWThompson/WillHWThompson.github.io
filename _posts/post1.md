@@ -1,5 +1,6 @@
 ---
 layout: post
+published: false
 title:  a post with formatting and links
 date:   2015-03-15 16:40:16
 description: march & april, looking forward to summer
@@ -28,4 +29,3 @@ Pug heirloom High Life vinyl swag, single-origin coffee four dollar toast taxide
 </blockquote>
 
 Fap aliqua qui, scenester pug Echo Park polaroid irony shabby chic ex cardigan church-key Odd Future accusamus. Blog stumptown sartorial squid, gastropub duis aesthetic Truffaut vero. Pinterest tilde twee, odio mumblecore jean shorts lumbersexual.
-

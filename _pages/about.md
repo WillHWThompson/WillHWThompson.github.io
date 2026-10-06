@@ -2,36 +2,21 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. PhD student in Complex Systems and Data Science at the Vermont Complex Systems Center 
-
 profile:
-  align: right
   image: headshot_2.jpg
-  image_circular: true # crops the image to make it circular
-  address: >
-
-news: true  # includes a list of news items
-selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true  # includes social icons at the bottom of the page
+news: true
+selected_papers: true
 ---
-## about me  
+## About
 
+I am a PhD student in Complex Systems and Data Science at the [University of Vermont](https://vermontcomplexsystems.org/). I work in the [Joint Lab](https://joint-lab.github.io/) with [Jean-Gabriel Young](https://jgyoung.ca/) and [Laurent Hébert-Dufresne](https://laurenthebertdufresne.github.io/).
 
-I am **Will Thompson**, a PhD student in **Complex Systems and Data Science** at the [Vermont Complex Systems Center](https://vermontcomplexsystems.org/). I work in the [Joint Lab](https://joint-lab.github.io/), where I am fortunate to be advised by [Jean-Gabriel Young](https://jgyoung.ca/) and [Laurent Hébert-Dufresne](https://laurenthebertdufresne.github.io/).
+Before coming to Vermont, I studied liberal arts at [St. John’s College](https://www.sjc.edu/), worked at [MITRE](https://www.mitre.org/our-impact/mitre-labs/modeling-and-analysis-innovation-center), and worked on the [Coherent CAPTAIN-Mills](https://ccm.mit.edu/) dark matter experiment at Los Alamos National Laboratory.
 
-I received a **B.A. in the Liberal Arts** from [St. John’s College](https://www.sjc.edu/) in Santa Fe, NM (May 2020). Afterward, I joined the **Modeling and Analysis Innovation Center** at the [MITRE Corporation](https://www.mitre.org/our-impact/mitre-labs/modeling-and-analysis-innovation-center). I later worked as a **post-bac researcher** at **Los Alamos National Laboratory** on [Coherent CAPTAIN-Mills](https://ccm.mit.edu/), a sub-GeV dark-matter detector.
+In summer 2026, I was a [Data Science for Social Good fellow](https://dssgfellowship.org/people/2026-fellows-mentors/) at Johns Hopkins, working with the City of Baton Rouge on [early warning models for blight and structural deterioration](https://dssgfellowship.org/project/early-warning-of-blight-and-structural-deterioration-risk-for-city-revitalization/).
 
+## Research
 
-## research
+I study how to infer the rules of a networked system from what it does. This includes reconstructing networks and contagion processes from observations, improving inference on graphs with loops, and exploring methods for Bayesian learning that avoid sampling. I also study how language models make choices when their preferences are inconsistent.
 
-I study how information and dynamics flow through networks. My research sits at the junction of Network Science, Bayesian Inference, and Machine Learning.
-
-I am primarily interested in inverse problems for network dynamics, reconstructing the underlying rules of a system from dynamics on a network. My current work focuses on three key challenges:
-
-- **Graphical Models**: Understanding why algorithms like Belief Propagation fail on loopy graphs and how to "tune" them on loopy graphs.
-
-- **Sampling-Free Inference**: Developing Fourier-space representations for Bayesian Neural Networks to enable exact learning without expensive sampling.
-
-- **Learning Social Dynamics**: Reverse-engineering the rules of social and biological contagions by observing their spread across complex networks.
-
-
+My work brings together network science, Bayesian inference, and machine learning. A full list of papers is on the [publications page]({{ '/publications/' | relative_url }}).
