@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://www.willhwthompson.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.willhwthompson.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-10-06T15:09:46+00:00</updated><id>https://www.willhwthompson.com/feed.xml</id><title type="html">blank</title><subtitle>Will Thompson studies network dynamics, Bayesian inference, and complex systems at the University of Vermont.
+</subtitle><entry><title type="html">Plato’s Republic electronic display</title><link href="https://www.willhwthompson.com/blog/2026/platos-republic-display/" rel="alternate" type="text/html" title="Plato’s Republic electronic display" /><published>2026-10-05T16:00:00+00:00</published><updated>2026-10-05T16:00:00+00:00</updated><id>https://www.willhwthompson.com/blog/2026/platos-republic-display</id><content type="html" xml:base="https://www.willhwthompson.com/blog/2026/platos-republic-display/"><![CDATA[<p>This summer, two of my friends got married (congratulations). For their wedding gift I decided to make something special. Both friends were big fans of Plato’s Republic. For their gift I decided to make an electronic box that displays the
+content of the republic slowly over time. The idea being that this device would sit on a desk and could be glanced at. Over time, the entirety of the Republic would be displayed.</p>
+
+<p>Growing up Catholic, I was always intrigued by the lectionary calendar. The Catholic missal includes readings from the old and new testament. Depending on the day the missal contains 2 or 3 readings. The homily given by the priest usually connects or explicates the content of these readings. Over the course of a two year cycle 71% of the New Testament is read and 13.5% of the Old Testament is read. I was always struck by the idea of reading a book at this snail’s pace, giving an ample amount of time to consider each and every word. I wanted to adapt this idea to another text - Plato’s Republic.</p>
+
+<p>I designed and laser cut the box itself out of birch sheet wood. The front is inscribed with the word “ΠΟΛΙΤΕΑ, ΠΛΑΤΩΝ” or “REPUBLIC, PLATO”. The back is inscribed with a message to the bride and groom, also in Attic greek.</p>
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/res_publica_photos/all_unpainted-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/res_publica_photos/all_unpainted-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/res_publica_photos/all_unpainted-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/res_publica_photos/all_unpainted.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" alt="Unpainted wooden pieces laid out before assembly" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/res_publica_photos/unpainted-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/res_publica_photos/unpainted-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/res_publica_photos/unpainted-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/res_publica_photos/unpainted.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" alt="Close view of the laser-cut front panel" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/res_publica_photos/varnished_peices-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/res_publica_photos/varnished_peices-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/res_publica_photos/varnished_peices-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/res_publica_photos/varnished_peices.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" alt="Varnished wooden frame pieces" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+   left all frame pieces assembled and ready for varnish. middle: closeup of the faceplate, right: varnished pieces.
+</div>
+
+<p>I then fitted the pieces together and wood glued the frame together to let it dry.</p>
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/res_publica_photos/painted_frame-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/res_publica_photos/painted_frame-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/res_publica_photos/painted_frame-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/res_publica_photos/painted_frame.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" alt="Assembled and painted frame" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+   The finished and constructed frame.
+</div>
+
+<p>The box is powered by a raspberry pi 4 with an OLED screen. The display itself is a simple webpage displayed with Chromium’s kiosk mode. The changing script is made using python. The text scrolls over time so every five minutes, a new line is added to the bottom of the text and the top line is removed.</p>
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/res_publica_photos/inside-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/res_publica_photos/inside-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/res_publica_photos/inside-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/res_publica_photos/inside.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" alt="Raspberry Pi and display mounted inside the frame" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+   The raspberry pi 4 and OLED screen mounted inside the frame.
+</div>
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    
+    <source class="responsive-img-srcset" media="(max-width: 480px)" srcset="/assets/img/res_publica_photos/book_4_better_colors-480.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 800px)" srcset="/assets/img/res_publica_photos/book_4_better_colors-800.webp" />
+    <source class="responsive-img-srcset" media="(max-width: 1400px)" srcset="/assets/img/res_publica_photos/book_4_better_colors-1400.webp" />
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/res_publica_photos/book_4_better_colors.jpg" class="img-fluid rounded z-depth-1" width="auto" height="auto" alt="Finished display showing text from Plato's Republic" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+  The completed display showing republic text.
+</div>]]></content><author><name></name></author><category term="projects" /><category term="making" /><category term="raspberry-pi" /><summary type="html"><![CDATA[A Raspberry Pi display that reveals Plato's Republic slowly over time.]]></summary></entry><entry><title type="html">Scientific Workflows on the Eve of the Butlerian Jihad</title><link href="https://www.willhwthompson.com/blog/2026/scientific-software-development/" rel="alternate" type="text/html" title="Scientific Workflows on the Eve of the Butlerian Jihad" /><published>2026-02-28T09:00:00+00:00</published><updated>2026-02-28T09:00:00+00:00</updated><id>https://www.willhwthompson.com/blog/2026/scientific-software-development</id><content type="html" xml:base="https://www.willhwthompson.com/blog/2026/scientific-software-development/"><![CDATA[<iframe id="post-iframe" src="/assets/posts/scientific-software/index.html" style="width: 100%; height: 8000px; border: none; display: block; overflow: hidden;" scrolling="no" title="Scientific Workflows on the Eve of the Butlerian Jihad"></iframe>
+<script>
+(function() {
+  var iframe = document.getElementById('post-iframe');
+  function resize() {
+    try {
+      var h = iframe.contentDocument.documentElement.scrollHeight;
+      if (h > 100) iframe.style.height = h + 'px';
+    } catch(e) {}
+  }
+  iframe.addEventListener('load', function() {
+    resize();
+    setTimeout(resize, 500);
+    setTimeout(resize, 1500);
+    setTimeout(resize, 4000);
+  });
+})();
+</script>]]></content><author><name></name></author><category term="research" /><category term="scientific-computing" /><category term="reproducibility" /><category term="workflow" /><category term="python" /><summary type="html"><![CDATA[Notes on the tools I use to keep research code reproducible and manageable.]]></summary></entry><entry><title type="html">Generalization Error via the Replica Method</title><link href="https://www.willhwthompson.com/blog/2024/generalization-error-replica/" rel="alternate" type="text/html" title="Generalization Error via the Replica Method" /><published>2024-12-02T12:00:00+00:00</published><updated>2024-12-02T12:00:00+00:00</updated><id>https://www.willhwthompson.com/blog/2024/generalization-error-replica</id><content type="html" xml:base="https://www.willhwthompson.com/blog/2024/generalization-error-replica/"><![CDATA[<iframe id="post-iframe" src="/assets/posts/generalization-error/index.html" style="width: 100%; height: 5000px; border: none; display: block; overflow: hidden;" scrolling="no" title="Generalization Error via the Replica Method"></iframe>
+<script>
+(function() {
+  var iframe = document.getElementById('post-iframe');
+  function resize() {
+    try {
+      var h = iframe.contentDocument.documentElement.scrollHeight;
+      if (h > 100) iframe.style.height = h + 'px';
+    } catch(e) {}
+  }
+  iframe.addEventListener('load', function() {
+    resize();
+    setTimeout(resize, 500);
+    setTimeout(resize, 1500);
+    setTimeout(resize, 4000);
+  });
+})();
+</script>]]></content><author><name></name></author><category term="research" /><category term="machine-learning" /><category term="statistical-physics" /><category term="random-matrix" /><summary type="html"><![CDATA[A statistical-physics treatment of high-dimensional learning using the replica method from disordered systems.]]></summary></entry></feed>
