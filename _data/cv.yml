@@ -104,6 +104,7 @@
 - title: Publications (Preprints)
   type: list
   contents:
+    - W. H. W. Thompson, M. Tian, L. Huynh, A. Wiedemann, V. Modisette, P. S. Chodrow, H. Z. Brooks. "[Learning Social Influence with Unobserved Attention](https://arxiv.org/abs/2610.12616)." arXiv:2610.12616 (2026).
     - A. Chawla, W. H. W. Thompson, J.-G. Young. "[Multiple latent orderings better predict language model preferences](https://arxiv.org/abs/2609.22170)." arXiv:2609.22170 (2026).
     - K. Tang, D. Kaiser, W. Thompson, J.-G. Young, L. Hébert-Dufresne, N. W. Landry. "[Emergent contagion complexity: Disentangling mechanistic complexity from correlated heterogeneity](https://arxiv.org/abs/2607.25139)." arXiv:2607.25139 (2026).
     - L. Hébert-Dufresne, A. Allard, J.-G. Young, W. H. W. Thompson, G. St-Onge. "[Simpson's paradox explains the ubiquity of nonlinear, threshold, and complex contagions](https://arxiv.org/abs/2605.00791)." arXiv:2605.00791 (2026).
@@ -119,7 +120,7 @@
 - title: Coherent CAPTAIN-Mills Collaboration
   type: list
   contents:
-    - A. A. Aguilar-Arevalo *et al.* "[Axion-Like Particle Search with a Hybrid Cherenkov-Scintillation Detector](https://arxiv.org/abs/2608.12616)." arXiv:2608.12616 (2026).
+    - A. A. Aguilar-Arevalo *et al.* "[Axionlike particle search with a hybrid Cherenkov-scintillation detector](https://doi.org/10.1103/ztsv-s7ts)." *Phys. Rev. D* **114** (7) 072008 (2026).
     - A. A. Aguilar-Arevalo *et al.* "[First Event-by-Event Identification of Cherenkov Radiation from Sub-MeV Particles in Liquid Argon](https://doi.org/10.1103/bklh-w3dn)." *Phys. Rev. Lett.* **135** (17) 171804 (2025).
     - A. A. Aguilar-Arevalo *et al.* "[Measurement of the liquid argon scintillation pulse shape using differentiable simulation in the coherent CAPTAIN-Mills experiment](https://doi.org/10.1103/34mf-z6l9)." *Phys. Rev. D* **112** (7) 072010 (2025).
     - A. A. Aguilar-Arevalo *et al.* "[Testing meson portal dark sector solutions to the MiniBooNE anomaly at the Coherent CAPTAIN-Mills experiment](https://doi.org/10.1103/PhysRevD.109.095017)." *Phys. Rev. D* **109** (9) 095017 (2024).
