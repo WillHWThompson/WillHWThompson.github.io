@@ -9,3 +9,8 @@ _site
 Gemfile.lock
 vendor
 
+
+# Master CV build outputs (compiled in CI, see deploy.yml)
+_cv/*
+!_cv/*.tex
+assets/pdf/WillThompson_CV.pdf

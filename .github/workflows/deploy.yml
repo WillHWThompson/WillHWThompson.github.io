@@ -28,6 +28,13 @@ jobs:
         npm install -g mermaid.cli
         gem update --system
         bundle update
+    - name: Compile master CV (LaTeX -> PDF)
+      uses: xu-cheng/latex-action@v3
+      with:
+        root_file: cv_master.tex
+        working_directory: _cv
+    - name: Stage CV PDF into site assets
+      run: cp _cv/cv_master.pdf assets/pdf/WillThompson_CV.pdf
     - name: Setup deploy options
       id: setup
       run: |
