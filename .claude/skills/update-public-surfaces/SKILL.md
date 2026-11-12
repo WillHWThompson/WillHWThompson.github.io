@@ -70,6 +70,11 @@ Match the formatting of neighbouring entries exactly — copy an existing entry 
 - cv_master.tex: same move: `..., ``Title.'' J. Abbrev., vol. V, no. N, PAGES, YYYY. \href{https://doi.org/<doi>}{doi:<doi>}`.
 - News item: `[“Title”](https://doi.org/<doi>) is now published in *Journal* **vol**, pages.`
 
+**Author-list conventions (apply to every new entry)**
+- Will's name is **bold** everywhere. Web: automatic via `site.scholar.first_name`/`last_name` in `_config.yml` + `_layouts/bib.html` — if he publishes under a new name form, add it to `first_name`. cv.yml: wrap as `**W. H. W. Thompson**`. tex: `\me{...}`.
+- Equal contribution: check the PDF's author block for ∗/† footnotes ("contributed equally"). Mark each equal author: bib `Last*, First` (the `*` on the last name; the layout strips it for matching), cv.yml `Name\*`, tex `Name$^*$`. The "Equal contribution" legends already exist (publications.md, cv.yml after the preprints, tex Preprints heading) — if an equal-contribution paper lands in another section, add a legend there too.
+- cv.yml YAML gotchas: any list item that starts with `*` or contains `: ` (e.g. a title with a colon) MUST be wrapped in single quotes (double any `'` inside), otherwise YAML reads it as an alias or a key/value map and the CV renders `=>`. After editing, check with `ruby -ryaml -e 'YAML.load_file("_data/cv.yml").each{|x| (x["contents"]||[]).each{|c| abort c.inspect unless x["type"]!="list" || c.is_a?(String)}}'`.
+
 Never delete or rewrite other content. Keep cv.yml and cv_master.tex lists in the same order with the same papers — after editing, diff the two lists (titles) and fix any drift you find, in either direction.
 
 ## 3. Verify

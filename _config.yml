@@ -240,7 +240,7 @@ display_tags: [] # Hide unused sample tags; post tags remain available on each a
 scholar:
 
   last_name: [Thompson]
-  first_name: [Will H W]
+  first_name: [William H. W., William, Will, W. H. W., W. H., W.]
 
   style: apa
   locale: en
@@ -267,7 +267,7 @@ scholar:
 filtered_bibtex_keywords: [abbr, abstract, arxiv, bibtex_show, html, pdf, selected, supp, blog, code, poster, slides, website, preview, altmetric]
 
 # Maximum number of authors to be shown for each publication (more authors are visible on click)
-max_author_limit: 3  # leave blank to always show all authors
+max_author_limit: 12  # leave blank to always show all authors
 more_authors_animation_delay: 10  # more authors are revealed on click using animation; smaller delay means faster animation
 
 

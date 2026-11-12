@@ -104,17 +104,18 @@
 - title: Publications (Preprints)
   type: list
   contents:
-    - W. H. W. Thompson, M. Tian, L. Huynh, A. Wiedemann, V. Modisette, P. S. Chodrow, H. Z. Brooks. "[Learning Social Influence with Unobserved Attention](https://arxiv.org/abs/2610.12616)." arXiv:2610.12616 (2026).
-    - A. Chawla, W. H. W. Thompson, J.-G. Young. "[Multiple latent orderings better predict language model preferences](https://arxiv.org/abs/2609.22170)." arXiv:2609.22170 (2026).
-    - K. Tang, D. Kaiser, W. Thompson, J.-G. Young, L. Hébert-Dufresne, N. W. Landry. "[Emergent contagion complexity: Disentangling mechanistic complexity from correlated heterogeneity](https://arxiv.org/abs/2607.25139)." arXiv:2607.25139 (2026).
-    - L. Hébert-Dufresne, A. Allard, J.-G. Young, W. H. W. Thompson, G. St-Onge. "[Simpson's paradox explains the ubiquity of nonlinear, threshold, and complex contagions](https://arxiv.org/abs/2605.00791)." arXiv:2605.00791 (2026).
-    - W. H. W. Thompson, Z. Wojtowicz, S. DeDeo. "[Levy Flights of the Collective Imagination](https://arxiv.org/abs/1812.04013)." arXiv:1812.04013 (2018).
+    - '**W. H. W. Thompson**, M. Tian, L. Huynh, A. Wiedemann, V. Modisette, P. S. Chodrow, H. Z. Brooks. "[Learning Social Influence with Unobserved Attention](https://arxiv.org/abs/2610.12616)." arXiv:2610.12616 (2026).'
+    - A. Chawla\*, **W. H. W. Thompson**\*, J.-G. Young. "[Multiple latent orderings better predict language model preferences](https://arxiv.org/abs/2609.22170)." arXiv:2609.22170 (2026).
+    - 'K. Tang\*, D. Kaiser\*, **W. Thompson**\*, J.-G. Young, L. Hébert-Dufresne, N. W. Landry. "[Emergent contagion complexity: Disentangling mechanistic complexity from correlated heterogeneity](https://arxiv.org/abs/2607.25139)." arXiv:2607.25139 (2026).'
+    - L. Hébert-Dufresne, A. Allard, J.-G. Young, **W. H. W. Thompson**, G. St-Onge. "[Simpson's paradox explains the ubiquity of nonlinear, threshold, and complex contagions](https://arxiv.org/abs/2605.00791)." arXiv:2605.00791 (2026).
+    - '**W. H. W. Thompson**, Z. Wojtowicz, S. DeDeo. "[Levy Flights of the Collective Imagination](https://arxiv.org/abs/1812.04013)." arXiv:1812.04013 (2018).'
+    - "*\\* Equal contribution.*"
 
 - title: Publications (Peer-Reviewed Journals)
   type: list
   contents:
-    - M. C. Boudreau, W. H. W. Thompson, C. M. Danforth, J.-G. Young, L. Hébert-Dufresne. "[Sensitivity analysis of epidemic forecasting and spreading on networks with probability generating functions](https://doi.org/10.1098/rsif.2025.0686)." *Journal of the Royal Society Interface* **23** (235) 20250686 (2026).
-    - N. W. Landry, W. H. W. Thompson, L. Hébert-Dufresne, J.-G. Young. "[Reconstructing networks from simple and complex contagions](https://doi.org/10.1103/PhysRevE.110.L042301)." *Phys. Rev. E* **110** (4) L042301 (2024).
+    - M. C. Boudreau, **W. H. W. Thompson**, C. M. Danforth, J.-G. Young, L. Hébert-Dufresne. "[Sensitivity analysis of epidemic forecasting and spreading on networks with probability generating functions](https://doi.org/10.1098/rsif.2025.0686)." *Journal of the Royal Society Interface* **23** (235) 20250686 (2026).
+    - N. W. Landry, **W. H. W. Thompson**, L. Hébert-Dufresne, J.-G. Young. "[Reconstructing networks from simple and complex contagions](https://doi.org/10.1103/PhysRevE.110.L042301)." *Phys. Rev. E* **110** (4) L042301 (2024).
     - K. Adusumilli *et al.* "[The Structure and Dynamics of Modern United States Federal Case Law](https://doi.org/10.3389/fphy.2021.695219)." *Frontiers in Physics* **9** (Jan 2022).
 
 - title: Coherent CAPTAIN-Mills Collaboration
@@ -131,8 +132,8 @@
 - title: Conference Proceedings
   type: list
   contents:
-    - W. Thompson *et al.* "[Evolving Robust Facility Placements](https://doi.org/10.1145/3583133.3590712)." *Companion Proc. GECCO 2023*, pp. 775-778.
-    - A. Isherwood, W. Thompson, *et al.* "[Modeling Macaque Fighting Dynamics with the Evolutionary Model Discovery Framework](https://doi.org/10.1007/978-3-031-37553-8_9)." *CSS Society Conference 2022*.
+    - '**W. Thompson** *et al.* "[Evolving Robust Facility Placements](https://doi.org/10.1145/3583133.3590712)." *Companion Proc. GECCO 2023*, pp. 775-778.'
+    - A. Isherwood, **W. Thompson**, *et al.* "[Modeling Macaque Fighting Dynamics with the Evolutionary Model Discovery Framework](https://doi.org/10.1007/978-3-031-37553-8_9)." *CSS Society Conference 2022*.
 
 - title: Teaching & Mentorship
   type: time_table
